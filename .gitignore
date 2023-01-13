@@ -1,0 +1,34 @@
+# Dependency directories
+node_modules/
+
+# next.js build output
+.next
+
+# typescript build output
+dist
+.env
+
+# pwa
+sw.js
+sw.js.*
+workbox-*.js
+workbox-*.js.*
+pages/debug.tsx
+/temp
+
+pages/dev
+
+patch/dist
+tmp
+out
+release.zip
+
+run
+.idea
+.DS_Store
+
+src/pages/dev
+
+public/md.md
+
+json-schema.json
