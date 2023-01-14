@@ -19,8 +19,10 @@ export const BasicLayout: FC<PropsWithChildren> = observer(({ children }) => {
   }, [])
   return (
     <ConfigProvider>
-      <Header />
-      <main className={styles.container}>{children}</main>
+      <div>
+        <Header />
+        <main className={styles.container}>{children}</main>
+      </div>
     </ConfigProvider>
   )
 })
