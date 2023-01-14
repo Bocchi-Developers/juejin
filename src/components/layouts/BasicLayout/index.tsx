@@ -6,8 +6,8 @@ import { ConfigProvider } from '@arco-design/web-react'
 
 import { store } from '~/store'
 
-import Footer from './Footer'
 import Header from './Header'
+import styles from './index.module.less'
 
 export const BasicLayout: FC<PropsWithChildren> = observer(({ children }) => {
   useEffect(() => {
@@ -20,8 +20,7 @@ export const BasicLayout: FC<PropsWithChildren> = observer(({ children }) => {
   return (
     <ConfigProvider>
       <Header />
-      {children}
-      <Footer />
+      <main className={styles.container}>{children}</main>
     </ConfigProvider>
   )
 })

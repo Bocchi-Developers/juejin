@@ -1,4 +1,5 @@
-import { Button } from '@arco-design/web-react'
+import { Content } from '~/components/in-page/Home'
+import { Navbar } from '~/components/in-page/Home/navbar'
 
 import { useMediaToggle } from '~/hooks/use-media-toggle'
 
@@ -6,14 +7,8 @@ export default function Home() {
   const { toggle, value } = useMediaToggle()
   return (
     <>
-      <h1>基于 Nextjs 开发仿掘金站点</h1>
-      <Button onClick={() => toggle()} type="primary">
-        Light Mode
-      </Button>
-      <Button onClick={() => toggle()} type="primary">
-        Dark Mode
-      </Button>
-      The current theme is: {value ? 'dark' : 'light'}
+      <Navbar/>
+      <Content/>
     </>
   )
 }

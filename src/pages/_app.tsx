@@ -1,5 +1,5 @@
 import '@arco-design/web-react/dist/css/arco.css'
-import '~/assets/styles/main.less'
+import '~/assets/styles/main.css'
 
 import type { AppProps } from 'next/app'
 import { memo } from 'react'
