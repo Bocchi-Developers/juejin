@@ -1,5 +1,17 @@
+const withLess = require('next-with-less')
+
+const bundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+const plugins = [bundleAnalyzer, withLess]
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const bookstairsConfig = {
   reactStrictMode: false,
 }
-module.exports = nextConfig
+
+module.exports = plugins.reduce(
+  (config, plugin) => plugin(config),
+  bookstairsConfig,
+)

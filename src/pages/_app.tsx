@@ -1,3 +1,5 @@
+import '~/assets/styles/main.less'
+
 import type { AppProps } from 'next/app'
 import { memo } from 'react'
 import type { FC, PropsWithChildren } from 'react'
