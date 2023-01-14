@@ -2,7 +2,7 @@ import { Head, Html, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
-    <Html lang={'zh-cn'}>
+    <Html lang={'zh'}>
       <Head>
         <meta charSet="UTF-8" />
         <meta name="mobile-web-app-capable" content="yes" />
