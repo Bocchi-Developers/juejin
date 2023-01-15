@@ -1,9 +1,10 @@
+import clsx from 'clsx'
 import { observer } from 'mobx-react-lite'
-import Image from 'next/image'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { Button } from '@arco-design/web-react'
 
+import { Logo as JuejinLogo } from '~/components/universal/Logo'
 import { useMediaToggle } from '~/hooks/use-media-toggle'
 import { useStore } from '~/store'
 
@@ -54,17 +55,10 @@ const SwitchTheme = () => {
   )
 }
 
-const Logo = ({
-  isHideText,
-}: {
-  /**
-   * logo文字是否隐藏
-   */
-  isHideText?: boolean
-}) => {
+const Logo = ({ isHideText }: { isHideText?: boolean }) => {
   return (
     <span className={styles.logo}>
-      <Image src={'/juejin.svg'} width={36} height={28} alt={'juejin_logo'} />
+      <JuejinLogo />
       <b className={isHideText ? styles.hidden : ' '}>稀土掘金</b>
     </span>
   )
@@ -72,76 +66,55 @@ const Logo = ({
 const TabItem = (props: TabItemProps) => {
   return (
     <div
-      className={
-        `${styles['tab-item']} ` +
-        `${props.active ? styles.active : ' '} ${
-          !props.promoteText ? styles['before-hidden'] : ' '
-        }`
-      }
+      className={clsx(
+        styles['tab-item'],
+        props.active && styles['active'],
+        !props.promoteText && styles['before-hidden'],
+      )}
       data-promote={props.promoteText?.slice(0, 5)}
     >
       {props.text}
     </div>
   )
 }
-const Tab = ({
-  children,
-  hidden,
-  isMobile,
-  setHidden,
-}: {
-  children: React.ReactNode
-  hidden?: boolean
-  isMobile?: boolean
-  setHidden: React.Dispatch<React.SetStateAction<boolean>>
-}) => {
-  const [active, setActive] = useState(false)
-  return (
-    <>
-      <div
-        className={`${styles['tab-first']} ${isMobile ? ' ' : styles.hidden} ${
-          active ? styles['tab-first-active'] : ' '
-        }`}
-        onClick={() => {
-          setHidden((pre) => !pre)
-          setActive((pre) => !pre)
-        }}
-      >
-        首页
-      </div>
-      <div
-        className={`${styles.tab} ${isMobile ? styles['tab-mobile'] : ' '} ${
-          hidden ? styles.hidden : ' '
-        }`}
-      >
-        {children}
-      </div>
-    </>
-  )
-}
 const Header = observer(() => {
   const {
     appUIStore: { viewport },
+    appStore: { isNarrowThanLaptop },
   } = useStore()
   const [hidden, setHidden] = useState(true)
+  const [active, setActive] = useState(false)
+  const isMobile = isNarrowThanLaptop
+  const isHidden = isNarrowThanLaptop ? hidden : false
   const tabs = getTabs()
   return (
     <header className={styles['main-header']}>
       <div className={styles['header-container']}>
         <Logo isHideText={viewport.mobile} />
-        <Tab
-          setHidden={setHidden}
-          isMobile={viewport.mobile || viewport.pad}
-          hidden={viewport.mobile || viewport.pad ? hidden : false}
+        <div
+          className={clsx(
+            styles['tab-first'],
+            !isMobile && styles.hidden,
+            active && styles['tab-first-active'],
+          )}
+          onClick={() => {
+            setHidden((pre) => !pre)
+            setActive((pre) => !pre)
+          }}
+        >
+          首页
+        </div>
+        <div
+          className={clsx(
+            styles.tab,
+            isMobile && styles['tab-mobile'],
+            isHidden && styles.hidden,
+          )}
         >
           {tabs.map((tab) => (
-            <TabItem
-              text={tab.text}
-              key={tab.text}
-              promoteText={tab.promoteText}
-            />
+            <TabItem key={tab.text} {...tab} />
           ))}
-        </Tab>
+        </div>
       </div>
     </header>
   )
