@@ -1,0 +1,122 @@
+name: Pull Request Checker
+
+on:
+  pull_request:
+
+jobs:
+  build:
+
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+        os: [ubuntu-latest, macos-latest]
+    
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Cache pnpm modules
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-pnpm-modules
+      with:
+        path: ~/.pnpm-store
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+    - uses: pnpm/action-setup@v2.2.4
+      with:
+        version: latest
+        run_install: true
+    - name: Install dependencies
+      run: pnpm i --no-optional
+    - name: Build project
+      run: |
+        npm run build
+
+  test:
+    needs: build
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+        os: ['ubuntu-latest']
+    
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Add ci-passed label
+      if: ${{ success() && github.event.pull_request.draft == false }}
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          github.rest.issues.addLabels({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            labels: ['ci-passed']
+          })
+    - name: Remove ci-failed label
+      if: ${{ success() && github.event.pull_request.draft == false }}
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const labels = await github.rest.issues.listLabelsOnIssue({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo
+          })
+          const label = labels.data.find(label => label.name === 'ci-failed')
+          if (label) {
+            github.rest.issues.removeLabel({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: label.name
+            })
+          }
+    - name: Add ci-failed label
+      if: ${{ failure() && github.event.pull_request.draft == false }}
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const labels = await github.rest.issues.listLabelsOnIssue({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo
+          })
+          const label = labels.data.find(label => label.name === 'ci-failed')
+          if (!label) {
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['ci-failed']
+            })
+          }
+    - name: Remove ci-passed label
+      if: ${{ failure() && github.event.pull_request.draft == false }}
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const labels = await github.rest.issues.listLabelsOnIssue({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo
+          })
+          const hasPassedLabel = labels.data.some(label => label.name === 'ci-passed')
+          if (hasPassedLabel) {
+            github.rest.issues.removeLabel({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: 'ci-passed'
+            })
+          }
