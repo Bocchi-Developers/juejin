@@ -57,7 +57,7 @@ const Logo = ({ isHideText }: { isHideText?: boolean }) => {
   return (
     <span className={styles.logo}>
       <JuejinLogo />
-      <b className={isHideText ? styles.hidden : ' '}>稀土掘金</b>
+      {isHideText ? null : <b>稀土掘金</b>}
     </span>
   )
 }
@@ -77,41 +77,39 @@ const TabItem = (props: TabItemProps) => {
 }
 const Header = observer(() => {
   const {
-    appUIStore: { viewport },
-    appStore: { isNarrowThanLaptop },
+    appStore: { isNarrowThanLaptop, viewport },
   } = useStore()
   const [hidden, setHidden] = useState(true)
-  const [active, setActive] = useState(false)
-  const isMobile = isNarrowThanLaptop
-  const isHidden = isNarrowThanLaptop ? hidden : false
   return (
     <header className={styles['main-header']}>
       <div className={styles['header-container']}>
         <Logo isHideText={viewport.mobile} />
-        <div
-          className={clsx(
-            styles['tab-first'],
-            !isMobile && styles.hidden,
-            active && styles['tab-first-active'],
-          )}
-          onClick={() => {
-            setHidden((pre) => !pre)
-            setActive((pre) => !pre)
-          }}
-        >
-          首页
-        </div>
-        <div
-          className={clsx(
-            styles.tab,
-            isMobile && styles['tab-mobile'],
-            isHidden && styles.hidden,
-          )}
-        >
-          {Tabs.map((tab) => (
-            <TabItem key={tab.text} {...tab} />
-          ))}
-        </div>
+        {isNarrowThanLaptop && (
+          <div
+            className={clsx(
+              styles['tab-first'],
+              !hidden && styles['tab-first-active'],
+            )}
+            onClick={() => {
+              setHidden((pre) => !pre)
+            }}
+          >
+            首页
+          </div>
+        )}
+
+        {!(isNarrowThanLaptop ? hidden : false) && (
+          <div
+            className={clsx(
+              styles.tab,
+              isNarrowThanLaptop && styles['tab-mobile'],
+            )}
+          >
+            {Tabs.map((tab) => (
+              <TabItem key={tab.text} {...tab} />
+            ))}
+          </div>
+        )}
       </div>
     </header>
   )
