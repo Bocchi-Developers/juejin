@@ -8,6 +8,9 @@ node_modules/
 dist
 .env
 
+#for debugging components
+/src/pages/test.tsx
+/src/assets/styles/test.module.css
 # pwa
 sw.js
 sw.js.*
