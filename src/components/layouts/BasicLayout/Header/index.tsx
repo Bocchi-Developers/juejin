@@ -15,34 +15,32 @@ interface TabItemProps {
   active?: boolean
   promoteText?: string
 }
-const getTabs = () => {
-  return [
-    {
-      text: '首页',
-      promoteText: '',
-    },
-    {
-      text: '沸点',
-      promoteText: '',
-    },
-    {
-      text: '直播',
-      promoteText: '',
-    },
-    {
-      text: '课程',
-      promoteText: '小册上新',
-    },
-    {
-      text: '活动',
-      promoteText: '',
-    },
-    {
-      text: 'app',
-      promoteText: '邀请有利',
-    },
-  ]
-}
+const Tabs = [
+  {
+    text: '首页',
+    promoteText: '',
+  },
+  {
+    text: '沸点',
+    promoteText: '',
+  },
+  {
+    text: '直播',
+    promoteText: '',
+  },
+  {
+    text: '课程',
+    promoteText: '小册上新',
+  },
+  {
+    text: '活动',
+    promoteText: '',
+  },
+  {
+    text: 'app',
+    promoteText: '邀请有利',
+  },
+]
 const SwitchTheme = () => {
   const { toggle, value } = useMediaToggle()
   return (
@@ -86,7 +84,6 @@ const Header = observer(() => {
   const [active, setActive] = useState(false)
   const isMobile = isNarrowThanLaptop
   const isHidden = isNarrowThanLaptop ? hidden : false
-  const tabs = getTabs()
   return (
     <header className={styles['main-header']}>
       <div className={styles['header-container']}>
@@ -111,7 +108,7 @@ const Header = observer(() => {
             isHidden && styles.hidden,
           )}
         >
-          {tabs.map((tab) => (
+          {Tabs.map((tab) => (
             <TabItem key={tab.text} {...tab} />
           ))}
         </div>
