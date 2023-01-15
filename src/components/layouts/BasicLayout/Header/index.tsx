@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { observer } from 'mobx-react-lite'
+import Link from 'next/link'
 import { useState } from 'react'
 
 import { Button } from '@arco-design/web-react'
@@ -15,10 +16,11 @@ interface TabItemProps {
   active?: boolean
   promoteText?: string
 }
-const Tabs = [
+const Tabs: TabItemProps[] = [
   {
     text: '首页',
     promoteText: '',
+    active: true,
   },
   {
     text: '沸点',
@@ -55,24 +57,25 @@ const SwitchTheme = () => {
 
 const Logo = ({ isHideText }: { isHideText?: boolean }) => {
   return (
-    <span className={styles.logo}>
+    <Link className={styles.logo} href="/">
       <JuejinLogo />
-      {isHideText ? null : <b>稀土掘金</b>}
-    </span>
+      {!isHideText && <span>稀土掘金</span>}
+    </Link>
   )
 }
 const TabItem = (props: TabItemProps) => {
   return (
-    <div
+    <Link
       className={clsx(
         styles['tab-item'],
         props.active && styles['active'],
         !props.promoteText && styles['before-hidden'],
       )}
       data-promote={props.promoteText?.slice(0, 5)}
+      href="/"
     >
       {props.text}
-    </div>
+    </Link>
   )
 }
 const Header = observer(() => {
