@@ -93,14 +93,12 @@
   --juejin-background-jscore-radar: #232323;
 }
 
-
 [arco-theme='dark'] {
   --juejin-navigation: #333333;
   --juejin-font-1: #fff;
   --juejin-layer-1: #333333;
   --juejin-background: #000;
 }
-
 
 html {
   font-size: 12px;
@@ -110,6 +108,10 @@ html {
 
 body {
   color: var(--juejin-font-1);
-  background-color: var( --juejin-background);
+  background-color: var(--juejin-background);
 }
 
+a {
+  text-decoration: none;
+  color: var(--juejin-font-1);
+}
