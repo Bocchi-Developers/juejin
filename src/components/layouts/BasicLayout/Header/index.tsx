@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import type { FC } from 'react'
 import { useState } from 'react'
 
@@ -17,11 +18,11 @@ interface TabItemProps {
   active?: boolean
   promoteText?: string
 }
-const Tabs: TabItemProps[] = [
+const Tabs = [
   {
     text: '首页',
     promoteText: '',
-    active: true,
+    path: '/',
   },
   {
     text: '沸点',
@@ -76,6 +77,8 @@ const Header = observer(() => {
     appStore: { isNarrowThanLaptop, viewport },
   } = useStore()
   const [hidden, setHidden] = useState(true)
+
+  const router = useRouter()
   return (
     <header className={styles['main-header']}>
       <div className={styles['header-container']}>
@@ -105,7 +108,11 @@ const Header = observer(() => {
             )}
           >
             {Tabs.map((tab) => (
-              <TabItem key={tab.text} {...tab} />
+              <TabItem
+                key={tab.text}
+                active={router.pathname == tab.path}
+                {...tab}
+              />
             ))}
           </div>
         )}
