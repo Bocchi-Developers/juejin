@@ -1,14 +1,18 @@
-import { Content } from '~/components/in-page/Home'
+import { Advertisement } from '~/components/in-page/Home/advertisement'
+import { AuthorRecommend } from '~/components/in-page/Home/author'
+import { List } from '~/components/in-page/Home/list'
 import { Navbar } from '~/components/in-page/Home/navbar'
+import { ArticleLayout } from '~/components/layouts/ArticleLayout'
 
-import { useMediaToggle } from '~/hooks/use-media-toggle'
+const sidebar = [Advertisement, AuthorRecommend]
 
 export default function Home() {
-  const { toggle, value } = useMediaToggle()
   return (
     <>
-      <Navbar/>
-      <Content/>
+      <Navbar />
+      <ArticleLayout aside={sidebar} asideWidth={240}>
+        <List />
+      </ArticleLayout>
     </>
   )
 }

@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
+import type { FC } from 'react'
 import { useState } from 'react'
 
 import { Button } from '@arco-design/web-react'
@@ -55,15 +56,7 @@ const SwitchTheme = () => {
   )
 }
 
-const Logo = ({ isHideText }: { isHideText?: boolean }) => {
-  return (
-    <Link className={styles.logo} href="/">
-      <JuejinLogo />
-      {!isHideText && <span>稀土掘金</span>}
-    </Link>
-  )
-}
-const TabItem = (props: TabItemProps) => {
+const TabItem: FC<TabItemProps> = (props) => {
   return (
     <Link
       className={clsx(
@@ -86,7 +79,10 @@ const Header = observer(() => {
   return (
     <header className={styles['main-header']}>
       <div className={styles['header-container']}>
-        <Logo isHideText={viewport.mobile} />
+        <Link className={styles.logo} href="/">
+          <JuejinLogo />
+          {!viewport.mobile && <span>稀土掘金</span>}
+        </Link>
         {isNarrowThanLaptop && (
           <div
             className={clsx(
