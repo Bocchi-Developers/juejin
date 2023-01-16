@@ -19,16 +19,13 @@ export interface ArticleLayoutProps
 export const ArticleLayout: FC<ArticleLayoutProps> = observer(
   ({ children, aside, asideWidth, ...props }) => {
     const { appStore } = useStore()
-
     return (
       <main className={styles['main-content']} {...props}>
         <div className={styles['card-list']}>{children}</div>
         {!appStore.isNarrowThanLaptop && (
           <aside className={styles.sidebar} style={{ width: asideWidth }}>
             {aside?.map((Aside, index) => (
-              <section key={index} className={styles['sidebar-card']}>
-                <Aside />
-              </section>
+              <Aside key={index} />
             ))}
           </aside>
         )}

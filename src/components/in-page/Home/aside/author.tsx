@@ -1,8 +1,8 @@
-import styles from './author.module.less'
+import { Card } from '~/components/universal/Card'
 
 export const AuthorRecommend = () => {
   return (
-    <div className={styles['author-recommend']}>
+    <Card title="🎖️作者榜">
       <div>江南一点雨 </div>
       <div>江南一点雨 </div>
       <div>江南一点雨 </div>
@@ -10,6 +10,6 @@ export const AuthorRecommend = () => {
       <div>江南一点雨 </div>
       <div>江南一点雨 </div>
       <div>江南一点雨 </div>
-    </div>
+    </Card>
   )
 }
