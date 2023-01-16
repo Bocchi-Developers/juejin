@@ -1,7 +1,5 @@
 import { Avatar } from '@arco-design/web-react'
 
-import { Card } from '~/components/universal/Card'
-
 import style from './index.module.less'
 
 interface AuthorProps {
@@ -11,7 +9,7 @@ interface AuthorProps {
 }
 export const Author = (props: AuthorProps) => {
   return (
-    <Card>
+    <>
       <div className={style.container}>
         <Avatar size={48}>
           <img alt={props.name} src={props.avatar} />
@@ -24,6 +22,6 @@ export const Author = (props: AuthorProps) => {
           <span title={props.intro}>{props.intro}</span>
         </div>
       </div>
-    </Card>
+    </>
   )
 }
