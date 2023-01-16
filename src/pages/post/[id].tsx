@@ -9,7 +9,7 @@ const sidebar = [Author, RelatedPost, Catalog]
 const Post = () => {
   return (
     <ArticleLayout
-      style={{ marginTop: '7rem' }}
+      style={{ marginTop: '7rem', maxWidth: 1120 }}
       aside={sidebar}
       asideWidth={300}
     >
