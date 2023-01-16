@@ -6,6 +6,7 @@ import type {
   PropsWithChildren,
 } from 'react'
 
+import { Card } from '~/components/universal/Card'
 import { useStore } from '~/store'
 
 import styles from './index.module.less'
@@ -21,7 +22,7 @@ export const ArticleLayout: FC<ArticleLayoutProps> = observer(
     const { appStore } = useStore()
     return (
       <main className={styles['main-content']} {...props}>
-        <div className={styles['card-list']}>{children}</div>
+        <Card className={styles['card-list']}>{children}</Card>
         {!appStore.isNarrowThanLaptop && (
           <aside className={styles.sidebar} style={{ width: asideWidth }}>
             {aside?.map((Aside, index) => (
