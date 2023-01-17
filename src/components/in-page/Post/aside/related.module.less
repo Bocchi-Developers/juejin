@@ -1,7 +1,18 @@
-.container div{
-    display: block;
-    padding: 0.667rem 1.667rem;
-    line-height: 22px;
-    font-size: 1.167rem;
-    font-weight: 400;
+.list {
+  display: block;
+  line-height: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  a {
+    color: var(--color-text);
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: var(--juejin-font-brand2-hover);
+    }
+  }
 }
