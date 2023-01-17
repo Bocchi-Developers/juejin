@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import Link from 'next/link'
 
-import { List as AcroList } from '@arco-design/web-react'
+import { List as AcroList, Image } from '@arco-design/web-react'
 
 import { Divider } from '~/components/universal/Divider'
 import { relativeTimeFromNow } from '~/utils/time'
@@ -77,7 +77,13 @@ const ListItem = ({ item }: { item: Post }) => (
         key={item.id}
         extra={
           <div className="image-area">
-            <img alt={item.title} src={item.cover} width={120} height={80} />
+            <Image
+              alt={item.title}
+              src={item.cover}
+              width={120}
+              height={80}
+              preview={false}
+            />
           </div>
         }
       >
