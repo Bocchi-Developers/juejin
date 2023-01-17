@@ -48,6 +48,7 @@
   --juejin-font-2: #515767;
   --juejin-font-3: #8a919f;
   --juejin-font-4: #c2c8d1;
+  --juejin-font-5: #e5e6eb;
   --juejin-font-brand1-normal: #1e80ff;
   --juejin-font-brand2-hover: #1171ee;
   --juejin-font-brand3-click: #0060dd;
@@ -96,6 +97,7 @@
 [arco-theme='dark'] {
   --juejin-navigation: #333333;
   --juejin-font-1: #fff;
+  --juejin-font-5: #333333;
   --juejin-layer-1: #333333;
   --juejin-background: #000;
 }
