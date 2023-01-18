@@ -17,19 +17,27 @@
   }
 }
 .list {
-  padding: 0 20px 20px 20px;
+  padding: 4px 20px 0;
+  transition: all 0.1s ease-in;
+  color: var(--juejin-font-3);
+
+  &.cover {
+    padding: 15px 20px 0;
+  }
+
   &.hover:hover {
     background-color: var(--juejin-gray-1-4);
   }
 }
 .bar-container {
   display: flex;
-  padding: 5px 0;
+  padding: 5px 0 0 0;
   justify-self: center;
   align-items: center;
   .bar-author {
     // width: 1rem;
     width: fit-content;
+    color: var(--juejin-font-2);
     // padding: 0 0.5rem;
     &:hover {
       color: var(--juejin-brand-2-hover);
@@ -83,13 +91,13 @@
   }
 }
 .bar-ad {
-  margin-right: 0;
   margin-left: auto;
   border: 1px solid var(--juejin-font-4);
   box-sizing: border-box;
   border-radius: 2px;
+  padding: 0 0.4em;
   line-height: 18px;
-  width: 42px;
+  margin-bottom: 0.2em;
   text-align: center;
   color: var(--juejin-font-4);
   font-size: 13px;
@@ -98,20 +106,23 @@
   color: var(--juejin-font-1);
 }
 .ellipsis {
-  margin-right: 13px;
+  margin-right: 1em;
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
+}
+
+.description {
+  margin-top: 0.7em;
 }
 .title {
+  margin-top: 0.6em;
   font-weight: 700;
   font-size: 16px;
   line-height: 24px;
   // color: #1d2129;
-  margin-bottom: 8px;
-  width: 100%;
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
