@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { List as AcroList, Image } from '@arco-design/web-react'
+import { List as AcroList, Image, Skeleton } from '@arco-design/web-react'
 
 import { Divider } from '~/components/universal/Divider'
 import { relativeTimeFromNow } from '~/utils/time'
@@ -33,7 +33,7 @@ const tab = [
     },
   },
   {
-    name: '热门',
+    name: '热榜',
     query: {
       sort: 'three_days_hottest',
     },
@@ -41,18 +41,6 @@ const tab = [
 ]
 
 const post: Post[] = [
-  {
-    id: 1,
-    title: '「兔了个兔」创意投稿大赛来袭！秀兔兔创意，迎新年好礼！',
-    author: '掘金酱',
-    description:
-      '又是一年新春之际，祝福大家兔年快乐！本期创意投稿大赛主题为「兔了个兔」，围绕“兔”这个元素展开创意！',
-    cover:
-      'https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0563dc9f109143b2baecee702fe38705~tplv-k3u1fbpfcp-no-mark:240:240:240:160.awebp?',
-    // tags: ['前端', 'React'],
-    date: 1673961121920,
-    ad: true,
-  },
   {
     id: 2,
     title: '不用防抖和节流，用更底层的方式解决JS的重复请求',
@@ -64,6 +52,18 @@ const post: Post[] = [
     tags: ['前端', 'React'],
     date: 1673961111920,
     ad: false,
+  },
+  {
+    id: 1,
+    title: '「兔了个兔」创意投稿大赛来袭！秀兔兔创意，迎新年好礼！',
+    author: '掘金酱',
+    description:
+      '又是一年新春之际，祝福大家兔年快乐！本期创意投稿大赛主题为「兔了个兔」，围绕“兔”这个元素展开创意！',
+    cover:
+      'https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0563dc9f109143b2baecee702fe38705~tplv-k3u1fbpfcp-no-mark:240:240:240:160.awebp?',
+    // tags: ['前端', 'React'],
+    date: 1673961121920,
+    ad: true,
   },
   {
     id: 3,
@@ -290,32 +290,49 @@ const PostNav = () => {
     </nav>
   )
 }
+
 export const List = () => {
   const [postList, setPostList] = useState<Post[]>(post)
   const router = useRouter()
+  const [load, setLoad] = useState(false)
+  const fetchList = async () => {
+    const sort = router.query.sort
+
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        if (sort == 'newest') {
+          setPostList(post2)
+        } else if (sort == 'three_days_hottest') {
+          setPostList(post3)
+        } else {
+          setPostList(post)
+        }
+        resolve('')
+      }, 1000)
+    })
+    setLoad(false)
+  }
 
   useEffect(() => {
-    const sort = router.query.sort
-    setTimeout(() => {
-      if (sort == 'newest') {
-        setPostList(post2)
-      } else if (sort == 'three_days_hottest') {
-        setPostList(post3)
-      } else {
-        setPostList(post)
-      }
-    }, 1000)
+    setLoad(true)
+    fetchList()
   }, [router.query])
 
   return (
-    <>
+    <div>
       <PostNav />
-      <Divider />
-      <AcroList
-        bordered={false}
-        render={(item) => <ListItem item={item} key={item.id} />}
-        dataSource={postList}
-      />
-    </>
+      <div className={style.divider}>
+        <Divider />
+      </div>
+      {load ? (
+        <Skeleton className={style.skeleton} />
+      ) : (
+        <AcroList
+          bordered={false}
+          render={(item) => <ListItem item={item} key={item.id} />}
+          dataSource={postList}
+        />
+      )}
+    </div>
   )
 }
