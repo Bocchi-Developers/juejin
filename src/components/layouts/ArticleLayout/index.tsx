@@ -22,7 +22,9 @@ export const ArticleLayout: FC<ArticleLayoutProps> = observer(
     const { appStore } = useStore()
     return (
       <main className={styles['main-content']} {...props}>
-        <Card className={styles['card-list']}>{children}</Card>
+        <Card bodyStyle={{ padding: '0' }} className={styles['card-list']}>
+          {children}
+        </Card>
         {!appStore.isNarrowThanLaptop && (
           <aside className={styles.sidebar} style={{ width: asideWidth }}>
             {aside?.map((Aside, index) => (
