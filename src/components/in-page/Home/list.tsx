@@ -108,6 +108,39 @@ const post: Post[] = [
     tags: ['算法', 'Java', '面试'],
     date: 1673961101920,
   },
+  {
+    id: 9,
+    title: '分享10个比B站更刺激的网站，千万别轻易点开',
+    author: '程序员范某',
+    description:
+      '作为一个码龄8年+程序员，到现在还能保持着浓密的头发和健壮的身体，全靠这10个网站让我健（偷）康（偷）生（摸）活（鱼），今天就把我收藏夹里的网站无私分享出来，千万不要忘记点赞收藏！ This pers',
+    cover:
+      'https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1056c7eca7d4431f97486935d3f8f1e7~tplv-k3u1fbpfcp-no-mark:240:240:240:160.awebp?',
+    tags: ['算法', 'Java', '面试'],
+    date: 1673961101920,
+  },
+  {
+    id: 10,
+    title: '分享10个比B站更刺激的网站，千万别轻易点开',
+    author: '程序员范某',
+    description:
+      '作为一个码龄8年+程序员，到现在还能保持着浓密的头发和健壮的身体，全靠这10个网站让我健（偷）康（偷）生（摸）活（鱼），今天就把我收藏夹里的网站无私分享出来，千万不要忘记点赞收藏！ This pers',
+    cover:
+      'https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1056c7eca7d4431f97486935d3f8f1e7~tplv-k3u1fbpfcp-no-mark:240:240:240:160.awebp?',
+    tags: ['算法', 'Java', '面试'],
+    date: 1673961101920,
+  },
+  {
+    id: 11,
+    title: '分享10个比B站更刺激的网站，千万别轻易点开',
+    author: '程序员范某',
+    description:
+      '作为一个码龄8年+程序员，到现在还能保持着浓密的头发和健壮的身体，全靠这10个网站让我健（偷）康（偷）生（摸）活（鱼），今天就把我收藏夹里的网站无私分享出来，千万不要忘记点赞收藏！ This pers',
+    cover:
+      'https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1056c7eca7d4431f97486935d3f8f1e7~tplv-k3u1fbpfcp-no-mark:240:240:240:160.awebp?',
+    tags: ['算法', 'Java', '面试'],
+    date: 1673961101920,
+  },
 ]
 const TagBar = (props: Pick<Post, 'author' | 'date' | 'tags' | 'ad'>) => {
   const { author, date, tags, ad } = props
@@ -135,8 +168,13 @@ const TagBar = (props: Pick<Post, 'author' | 'date' | 'tags' | 'ad'>) => {
   )
 }
 const ListItem = ({ item }: { item: Post }) => (
-  <div className={clsx(style.list, !item.ad && style.hover)}>
-    <Divider />
+  <div
+    className={clsx(
+      style.list,
+      !item.ad && style.hover,
+      item.cover && style.cover,
+    )}
+  >
     <TagBar {...item} />
     <Link href={`post/${item.id}`} target="_blank">
       <AcroList.Item
@@ -165,11 +203,15 @@ const ListItem = ({ item }: { item: Post }) => (
         >
           {item.title}
         </div>
-        <div className={clsx(style.ellipsis)} title={item.description}>
+        <div
+          className={clsx(style.ellipsis, style.description)}
+          title={item.description}
+        >
           {item.description}
         </div>
       </AcroList.Item>
     </Link>
+    <Divider />
   </div>
 )
 const PostNav = () => {
@@ -191,6 +233,7 @@ export const List = () => {
   return (
     <>
       <PostNav />
+      <Divider />
       <AcroList
         bordered={false}
         render={(item) => <ListItem item={item} key={item.id} />}
