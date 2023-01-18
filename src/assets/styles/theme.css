@@ -10,6 +10,7 @@ html {
   -webkit-font-smoothing: unset !important;
   font-family: -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell,
     Noto Sans, sans-serif, BlinkMacSystemFon;
+    overflow: overlay;
 }
 
 body {

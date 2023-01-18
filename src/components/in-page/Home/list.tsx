@@ -1,5 +1,7 @@
 import clsx from 'clsx'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 import { List as AcroList, Image } from '@arco-design/web-react'
 
@@ -19,6 +21,25 @@ interface Post {
   ad?: boolean
   read?: boolean
 }
+
+const tab = [
+  {
+    name: '推荐',
+  },
+  {
+    name: '最新',
+    query: {
+      sort: 'newest',
+    },
+  },
+  {
+    name: '热门',
+    query: {
+      sort: 'three_days_hottest',
+    },
+  },
+]
+
 const post: Post[] = [
   {
     id: 1,
@@ -142,6 +163,48 @@ const post: Post[] = [
     date: 1673961101920,
   },
 ]
+
+const post2: Post[] = [
+  {
+    id: 1,
+    title: '「兔了个兔」创意投稿大赛来袭！秀兔兔创意，迎新年好礼！',
+    author: '掘金酱',
+    description:
+      '又是一年新春之际，祝福大家兔年快乐！本期创意投稿大赛主题为「兔了个兔」，围绕“兔”这个元素展开创意！',
+    cover:
+      'https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0563dc9f109143b2baecee702fe38705~tplv-k3u1fbpfcp-no-mark:240:240:240:160.awebp?',
+    // tags: ['前端', 'React'],
+    date: 1673961121920,
+    ad: true,
+  },
+  {
+    id: 2,
+    title: '不用防抖和节流，用更底层的方式解决JS的重复请求',
+    author: '掘金酱',
+    description:
+      '`once-init` 为解决异步函数问题而生。它从 `Promise` 的定义出发，又是一年新春之际，祝福大家兔年快乐',
+    // cover:
+    // 'https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0563dc9f109143b2baecee702fe38705~tplv-k3u1fbpfcp-no-mark:240:240:240:160.awebp?',
+    tags: ['前端', 'React'],
+    date: 1673961111920,
+    ad: false,
+  },
+]
+
+const post3: Post[] = [
+  {
+    id: 1,
+    title: '「兔了个兔」创意投稿大赛来袭！秀兔兔创意，迎新年好礼！',
+    author: '掘金酱',
+    description:
+      '又是一年新春之际，祝福大家兔年快乐！本期创意投稿大赛主题为「兔了个兔」，围绕“兔”这个元素展开创意！',
+    cover:
+      'https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0563dc9f109143b2baecee702fe38705~tplv-k3u1fbpfcp-no-mark:240:240:240:160.awebp?',
+    // tags: ['前端', 'React'],
+    date: 1673961121920,
+    ad: true,
+  },
+]
 const TagBar = (props: Pick<Post, 'author' | 'date' | 'tags' | 'ad'>) => {
   const { author, date, tags, ad } = props
   return (
@@ -168,13 +231,7 @@ const TagBar = (props: Pick<Post, 'author' | 'date' | 'tags' | 'ad'>) => {
   )
 }
 const ListItem = ({ item }: { item: Post }) => (
-  <div
-    className={clsx(
-      style.list,
-      !item.ad && style.hover,
-      item.cover && style.cover,
-    )}
-  >
+  <div className={clsx(style.list, !item.ad && style.hover)}>
     <TagBar {...item} />
     <Link href={`post/${item.id}`} target="_blank">
       <AcroList.Item
@@ -185,8 +242,8 @@ const ListItem = ({ item }: { item: Post }) => (
               <Image
                 alt={item.title}
                 src={item.cover}
-                width={120}
-                height={80}
+                width={105}
+                height={70}
                 preview={false}
               />
             </div>
@@ -215,21 +272,41 @@ const ListItem = ({ item }: { item: Post }) => (
   </div>
 )
 const PostNav = () => {
+  const router = useRouter()
   return (
     <nav className={style.nav}>
-      <Link className={clsx(style['nav-item'], style.active)} href={'/'}>
-        推荐
-      </Link>
-      <Link className={style['nav-item']} href={'/'}>
-        最新
-      </Link>
-      <Link className={style['nav-item']} href={'/'}>
-        热门
-      </Link>
+      {tab.map((item) => (
+        <Link
+          key={item.name}
+          className={clsx(
+            style['nav-item'],
+            router.query.sort == item.query?.sort && style.active,
+          )}
+          href={{ pathname: '/', query: item.query }}
+        >
+          {item.name}
+        </Link>
+      ))}
     </nav>
   )
 }
 export const List = () => {
+  const [postList, setPostList] = useState<Post[]>(post)
+  const router = useRouter()
+
+  useEffect(() => {
+    const sort = router.query.sort
+    setTimeout(() => {
+      if (sort == 'newest') {
+        setPostList(post2)
+      } else if (sort == 'three_days_hottest') {
+        setPostList(post3)
+      } else {
+        setPostList(post)
+      }
+    }, 1000)
+  }, [router.query])
+
   return (
     <>
       <PostNav />
@@ -237,7 +314,7 @@ export const List = () => {
       <AcroList
         bordered={false}
         render={(item) => <ListItem item={item} key={item.id} />}
-        dataSource={post}
+        dataSource={postList}
       />
     </>
   )
