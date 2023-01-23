@@ -6,7 +6,7 @@ specifiers:
   '@commitlint/config-conventional': ^17.4.2
   '@innei/bump-version': ^1.5.6
   '@next/bundle-analyzer': ^13.1.2
-  '@next/font': 13.1.4
+  '@next/font': 13.1.5
   '@suemor/eslint-config-react-ts': ^1.1.0
   '@suemor/prettier': ^1.1.0
   '@types/node': 18.11.18
@@ -34,7 +34,7 @@ specifiers:
 
 dependencies:
   '@arco-design/web-react': 2.44.0_5ndqzdd6t4rivxsukjv3i3ak2q
-  '@next/font': 13.1.4
+  '@next/font': 13.1.5
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
   clsx: 1.2.1
@@ -631,8 +631,8 @@ packages:
     resolution: {integrity: sha512-PpT4UZIX66VMTqXt4HKEJ+/PwbS+tWmmhZlazaws1a+dbUA5pPdjntQ46Jvj616i3ZKN9doS9LHx3y50RLjAWg==}
     dev: false
 
-  /@next/font/13.1.4:
-    resolution: {integrity: sha512-NfqQPAIFJhssdaZEsP0MADZKN+tc040jOkNKVlDZHtVjJWBJSgbe8UHg3w0S6YuQr7PHc0ACbFeVCBQeG4MEvg==}
+  /@next/font/13.1.5:
+    resolution: {integrity: sha512-6M5R6yC3JkdJiqo/YJxDp6+0vDn0smXOAzl8uHt4qmDS2u53ji/19K0HM51d+5kg8xntDi+N2hw7YjaU9inkNA==}
     dev: false
 
   /@next/swc-android-arm-eabi/13.1.2:
