@@ -1,14 +1,17 @@
 import { observer } from 'mobx-react-lite'
 import { NextSeo } from 'next-seo'
 import type { FC, PropsWithChildren } from 'react'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 
+import { InitialContext } from '~/context/initial-data'
 import { useCheckOldBrowser } from '~/hooks/use-check-old-browser'
 import { printToConsole } from '~/utils/console'
 
+import { DynamicHeadMeta } from '../biz/Meta/head'
+
 export const Content: FC<PropsWithChildren> = observer((props) => {
   const { check: checkBrowser } = useCheckOldBrowser()
-
+  const { seo } = useContext(InitialContext)
   useEffect(() => {
     checkBrowser()
     printToConsole()
@@ -16,13 +19,8 @@ export const Content: FC<PropsWithChildren> = observer((props) => {
 
   return (
     <>
-      <NextSeo
-        title={`稀土掘金`}
-        description={
-          '掘金是面向全球中文开发者的技术内容分享与交流平台。我们通过技术文章、沸点、课程、直播等产品和服务，打造一个激发开发者创作灵感，激励开发者沉淀分享，陪伴开发者成长的综合类技术社区。'
-        }
-      />
-
+      <DynamicHeadMeta />
+      <NextSeo title={`${seo.title}`} description={seo.description} />
       <div id="next">{props.children}</div>
     </>
   )
