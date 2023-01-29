@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { List as AcroList, Image, Skeleton } from '@arco-design/web-react'
+import { List as ArcoList, Image, Skeleton } from '@arco-design/web-react'
 
 import { Divider } from '~/components/universal/Divider'
 import { relativeTimeFromNow } from '~/utils/time'
@@ -234,7 +234,7 @@ const ListItem = ({ item }: { item: Post }) => (
   <div className={clsx(style.list, !item.ad && style.hover)}>
     <TagBar {...item} />
     <Link href={`post/${item.id}`} target="_blank">
-      <AcroList.Item
+      <ArcoList.Item
         key={item.id}
         extra={
           item.cover && (
@@ -266,7 +266,7 @@ const ListItem = ({ item }: { item: Post }) => (
         >
           {item.description}
         </div>
-      </AcroList.Item>
+      </ArcoList.Item>
     </Link>
     <Divider />
   </div>
@@ -327,7 +327,7 @@ export const List = () => {
       {load ? (
         <Skeleton className={style.skeleton} />
       ) : (
-        <AcroList
+        <ArcoList
           bordered={false}
           render={(item) => <ListItem item={item} key={item.id} />}
           dataSource={postList}
