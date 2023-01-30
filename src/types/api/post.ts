@@ -3,9 +3,17 @@ export interface IPaginate {
   pageSize: number
 }
 
+export type Sort =
+  | 'newest'
+  | 'three_days_hottest'
+  | 'weekly_hottest'
+  | 'monthly_hottest'
+  | 'hottest'
+
 export interface IPostListParam extends IPaginate {
   categoryId?: string
   tag?: string
+  sort?: Sort
 }
 
 export interface IPostListResponse {

@@ -8,7 +8,7 @@ import { List as ArcoList, Image, Skeleton } from '@arco-design/web-react'
 
 import { Divider } from '~/components/universal/Divider'
 import { PostApi } from '~/services/api/post'
-import type { IPostList } from '~/types/api/post'
+import type { IPostList, Sort } from '~/types/api/post'
 import { relativeTimeFromNow } from '~/utils/time'
 
 import style from './list.module.less'
@@ -119,17 +119,15 @@ export const List = () => {
   const [load, setLoad] = useState(true)
   const [hasMore, sethasMore] = useState(true)
   const fetchList = async (currentPage: number) => {
-    // await new Promise((resolve) => {
-    //   setTimeout(() => {
-    //     resolve(1)
-    //   }, 1000)
-    // })
-
+    const { sort } = router.query
     const postListData = await PostApi.postListRequest({
       pageCurrent: currentPage,
       pageSize: 15,
+      sort: sort as Sort,
     })
-    setPostList([...postList, ...postListData.postList])
+    setPostList((list) => {
+      return [...list, ...postListData.postList]
+    })
     setLoad(false)
     if (currentPage >= postListData?.totalPages) {
       sethasMore(false)
@@ -137,7 +135,9 @@ export const List = () => {
   }
 
   useEffect(() => {
-    const { sort } = router.query
+    setLoad(true)
+    sethasMore(true)
+    setPostList([])
     fetchList(1)
   }, [router.query])
 
