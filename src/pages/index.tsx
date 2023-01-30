@@ -1,3 +1,5 @@
+import type { NextPage } from 'next'
+
 import { Advertisement } from '~/components/in-page/Home/aside/advertisement'
 import { AuthorRecommend } from '~/components/in-page/Home/aside/author'
 import { List } from '~/components/in-page/Home/list'
@@ -6,7 +8,7 @@ import { ArticleLayout } from '~/components/layouts/ArticleLayout'
 
 const sidebar = [Advertisement, AuthorRecommend]
 
-export default function Home() {
+const Home: NextPage = () => {
   return (
     <>
       <Navbar />
@@ -16,3 +18,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home

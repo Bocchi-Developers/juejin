@@ -21,7 +21,7 @@ const App: FC<AppProps & Record<'initData', IAggregate>> = ({
 }) => {
   const Inner = useMemo(() => {
     // 兜底页
-    return initData ? (
+    return initData.user ? (
       <Wrapper>
         <Component {...pageProps} />
       </Wrapper>
@@ -48,13 +48,12 @@ const Wrapper: FC<PropsWithChildren> = memo((props) => {
 App.getInitialProps = async (props: AppContext) => {
   const ctx = props.ctx
 
-  const data = await AggregateApi.aggregateInfo()
-
+  const data = await AggregateApi.aggregateInfoRequest()
   const appProps = await (async () => {
     try {
       return await NextApp.getInitialProps(props)
     } catch (e) {
-      if (!data?.success) {
+      if (!data?.user) {
         throw e
       }
       // 这里捕获，为了走全局无数据页
@@ -68,7 +67,7 @@ App.getInitialProps = async (props: AppContext) => {
 
   return {
     ...appProps,
-    initData: data?.data,
+    initData: data,
   }
 }
 

@@ -1,9 +1,12 @@
-import axios from 'axios'
+import type { AxiosError } from 'axios'
+import axios, { CanceledError } from 'axios'
+import message from 'react-message-popup'
 
 import { API_URL } from '~/constants/env'
-import type { ApiResponse, AxiosErrorConfig } from '~/types/api'
+import type { ApiResponse } from '~/types/api'
+import { isClientSide } from '~/utils/env'
 
-import { handleConfigureAuth, handleNetworkError } from './tools'
+import { handleConfigureAuth } from './tools'
 
 axios.interceptors.request.use((config) => {
   config.baseURL = API_URL
@@ -12,13 +15,46 @@ axios.interceptors.request.use((config) => {
 })
 
 axios.interceptors.response.use(
-  (response) => {
-    if (response.status !== 200) return Promise.reject(response.data)
-    return response
-  },
-  (err: AxiosErrorConfig) => {
-    handleNetworkError(err.response?.data.success, err.response?.data.message)
-    Promise.reject(err.response)
+  undefined,
+  (error: AxiosError<Record<string, any> | undefined>) => {
+    if (error instanceof CanceledError) {
+      return Promise.reject(error)
+    }
+
+    if (process.env.NODE_ENV === 'development') {
+      console.error(error.message)
+    }
+    if (
+      !error.response ||
+      error.response.status === 408 ||
+      error.code === 'ECONNABORTED'
+    ) {
+      if (isClientSide()) {
+        message.error('请求超时，请检查一下网络哦！')
+      } else {
+        const msg = '上游服务器请求超时'
+        message.error(msg)
+        console.error(msg, error.message)
+      }
+    }
+    const response = error.response
+    if (response) {
+      const data = response.data
+
+      // eslint-disable-next-line no-empty
+      if (response.status == 401) {
+      } else if (data && data.message) {
+        message.error(
+          typeof data.message == 'string'
+            ? data.message
+            : Array.isArray(data.message)
+            ? data.message[0]
+            : '请求错误',
+        )
+      }
+    }
+
+    return Promise.reject(error)
   },
 )
 
@@ -27,7 +63,7 @@ export const Get = <T>(url: string, params?: {}): ApiResponse<T> =>
     axios
       .get(url, { params })
       .then((result) => {
-        resolve(result ? result.data : result)
+        resolve(result ? result.data.data : result)
       })
       .catch((err) => {
         resolve(err)
@@ -43,7 +79,7 @@ export const Post = <T>(
     axios
       .post(url, data, { params })
       .then((result) => {
-        resolve(result ? result.data : result)
+        resolve(result ? result.data.data : result)
       })
       .catch((err) => {
         resolve(err)
@@ -60,7 +96,7 @@ export const Patch = <T>(
     axios
       .patch(url, data, { params })
       .then((result) => {
-        resolve(result ? result.data : result)
+        resolve(result ? result.data.data : result)
       })
       .catch((err) => {
         resolve(err)
