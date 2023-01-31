@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import type { FC } from 'react'
 import { useState } from 'react'
 
+import { IconMoonFill, IconSunFill } from '@arco-design/web-react/icon'
+
 import { Logo as JuejinLogo } from '~/components/universal/Logo'
 import { useMediaToggle } from '~/hooks/use-media-toggle'
 import { useStore } from '~/store'
@@ -47,10 +49,11 @@ const SwitchTheme = () => {
   const { toggle, value } = useMediaToggle()
   return (
     <>
-      {/* <span>{`当前: ${value ? '夜间模式' : '白天模式'}`}</span>
-      <Button onClick={toggle} type="primary">
-        切换
-      </Button> */}
+      {value ? (
+        <IconSunFill className={styles.icon} onClick={toggle} />
+      ) : (
+        <IconMoonFill className={styles.icon} onClick={toggle} />
+      )}
     </>
   )
 }

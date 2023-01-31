@@ -1,4 +1,3 @@
-
 * {
   box-sizing: border-box;
 }
@@ -10,7 +9,7 @@ html {
   -webkit-font-smoothing: unset !important;
   font-family: -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell,
     Noto Sans, sans-serif, BlinkMacSystemFon;
-    overflow: overlay;
+  overflow: overlay;
 }
 
 body {
@@ -23,7 +22,8 @@ a {
   color: var(--juejin-font-3);
 }
 
-ul,li {
+ul,
+li {
   list-style: none;
   padding: 0px;
   margin: 0px;

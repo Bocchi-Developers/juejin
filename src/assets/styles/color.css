@@ -98,11 +98,11 @@
 
 [arco-theme='dark'] {
   --juejin-item-background: #121212;
-  --juejin-font-1: #fff;
+  --juejin-font-1: #f3f8ff;
   --juejin-font-5: #333333;
   --juejin-layer-1: #121212;
   --juejin-background: #222323;
-  --juejin-gray-1-4: #121212;
+  --juejin-gray-1-4: #424242;
   --juejin-navigation: #121212;
-  --juejin-gray-2: #494949;
+  --juejin-gray-2: #191919;
 }

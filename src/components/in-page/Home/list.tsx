@@ -144,9 +144,7 @@ export const List = () => {
   return (
     <div className={style['bg-wrapper']}>
       <PostNav />
-      <div className={style.divider}>
-        <Divider />
-      </div>
+      <Divider />
 
       {load ? (
         <Skeleton className={style.skeleton} />
