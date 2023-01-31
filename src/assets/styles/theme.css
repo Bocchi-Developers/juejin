@@ -15,6 +15,7 @@ html {
 body {
   color: var(--juejin-font-1);
   background-color: var(--juejin-background);
+  transition: all 0.2s;
 }
 
 a {
