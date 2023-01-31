@@ -90,7 +90,7 @@ const ListItem = ({ item }: { item: IPostList }) => (
         </div>
       </ArcoList.Item>
     </Link>
-    <Divider />
+    <Divider style={{ backgroundColor: 'var(--juejin-navigation)' }} />
   </li>
 )
 const PostNav = () => {
@@ -142,7 +142,7 @@ export const List = () => {
   }, [router.query])
 
   return (
-    <>
+    <div className={style['bg-wrapper']}>
       <PostNav />
       <div className={style.divider}>
         <Divider />
@@ -160,6 +160,6 @@ export const List = () => {
           ))}
         </InfiniteScroll>
       )}
-    </>
+    </div>
   )
 }

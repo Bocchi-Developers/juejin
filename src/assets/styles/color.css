@@ -80,6 +80,7 @@
   --juejin-coupon_2_card: rgba(255, 245, 244, 0.7);
   --juejin-coupon_3_stroke: rgba(246, 66, 66, 0.2);
   --juejin-navigation: #fff;
+  --juejin-item-background: #fff;
   --juejin-shade-1: rgba(0, 0, 0, 0.4);
   --juejin-shade-2: rgba(0, 0, 0, 0.6);
   --juejin-popup: #fff;
@@ -96,9 +97,11 @@
 }
 
 [arco-theme='dark'] {
-  --juejin-navigation: #333333;
+  --juejin-item-background: #121212;
   --juejin-font-1: #fff;
   --juejin-font-5: #333333;
-  --juejin-layer-1: #333333;
-  --juejin-background: #000;
+  --juejin-layer-1: #121212;
+  --juejin-background: #222323;
+  --juejin-gray-1-4: #121212;
+  --juejin-navigation: #121212;
 }
