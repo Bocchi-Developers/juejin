@@ -90,7 +90,7 @@ const ListItem = ({ item }: { item: IPostList }) => (
         </div>
       </ArcoList.Item>
     </Link>
-    <Divider style={{ backgroundColor: 'var(--juejin-navigation)' }} />
+    <Divider />
   </li>
 )
 const PostNav = () => {
