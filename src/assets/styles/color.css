@@ -94,15 +94,18 @@
   --juejin-font-priv-hint: #916be1;
   --juejin-background: #f4f5f5;
   --juejin-background-jscore-radar: #232323;
+  --juejin-scrollbar:#c1c1c1;
 }
 
 [arco-theme='dark'] {
   --juejin-item-background: #121212;
   --juejin-font-1: #f3f8ff;
+  --juejin-font-2: #e5e9ef;
   --juejin-font-5: #333333;
   --juejin-layer-1: #121212;
   --juejin-background: #222323;
   --juejin-gray-1-4: #1f1f1f;
   --juejin-navigation: #121212;
+  --juejin-gray-0: #222323;
   --juejin-gray-2: #191919;
 }

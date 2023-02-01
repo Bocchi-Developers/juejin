@@ -5,8 +5,7 @@ import { useRouter } from 'next/router'
 import type { FC } from 'react'
 import { useState } from 'react'
 
-import { IconMoon, IconSun } from '@arco-design/web-react/icon'
-
+import { IconNight, IconSun } from '~/components/universal/Icons/dark-mode'
 import { Logo as JuejinLogo } from '~/components/universal/Logo'
 import { useMediaToggle } from '~/hooks/use-media-toggle'
 import { useStore } from '~/store'
@@ -45,16 +44,12 @@ const Tabs = [
     promoteText: '邀请有利',
   },
 ]
-const SwitchTheme = () => {
+export const SwitchTheme = () => {
   const { toggle, value } = useMediaToggle()
   return (
-    <>
-      {value ? (
-        <IconSun className={styles.icon} onClick={toggle} />
-      ) : (
-        <IconMoon className={styles.icon} onClick={toggle} />
-      )}
-    </>
+    <div onClick={toggle} className={styles.icon}>
+      {value ? <IconSun /> : <IconNight />}
+    </div>
   )
 }
 
@@ -82,43 +77,45 @@ const Header = observer(() => {
   const router = useRouter()
   return (
     <header className={styles['main-header']}>
-      <div className={styles['header-container']}>
-        <Link className={styles.logo} href="/">
-          <JuejinLogo />
-          {!viewport.mobile && <span>稀土掘金</span>}
-        </Link>
-        {isNarrowThanLaptop && (
-          <div
-            className={clsx(
-              styles['tab-first'],
-              !hidden && styles['tab-first-active'],
-            )}
-            onClick={() => {
-              setHidden((pre) => !pre)
-            }}
-          >
-            首页
-          </div>
-        )}
+      <div className={styles.wrapper}>
+        <div className={styles['header-container']}>
+          <Link className={styles.logo} href="/">
+            <JuejinLogo />
+            {!viewport.mobile && <span>稀土掘金</span>}
+          </Link>
+          {isNarrowThanLaptop && (
+            <div
+              className={clsx(
+                styles['tab-first'],
+                !hidden && styles['tab-first-active'],
+              )}
+              onClick={() => {
+                setHidden((pre) => !pre)
+              }}
+            >
+              首页
+            </div>
+          )}
 
-        {!(isNarrowThanLaptop ? hidden : false) && (
-          <div
-            className={clsx(
-              styles.tab,
-              isNarrowThanLaptop && styles['tab-mobile'],
-            )}
-          >
-            {Tabs.map((tab) => (
-              <TabItem
-                key={tab.text}
-                active={router.pathname == tab.path}
-                {...tab}
-              />
-            ))}
-          </div>
-        )}
+          {!(isNarrowThanLaptop ? hidden : false) && (
+            <div
+              className={clsx(
+                styles.tab,
+                isNarrowThanLaptop && styles['tab-mobile'],
+              )}
+            >
+              {Tabs.map((tab) => (
+                <TabItem
+                  key={tab.text}
+                  active={router.pathname == tab.path}
+                  {...tab}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+        <SwitchTheme />
       </div>
-      <SwitchTheme />
     </header>
   )
 })
