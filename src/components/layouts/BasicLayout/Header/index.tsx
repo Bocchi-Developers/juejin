@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import type { FC } from 'react'
 import { useState } from 'react'
 
-import { IconMoonFill, IconSunFill } from '@arco-design/web-react/icon'
+import { IconMoon, IconSun } from '@arco-design/web-react/icon'
 
 import { Logo as JuejinLogo } from '~/components/universal/Logo'
 import { useMediaToggle } from '~/hooks/use-media-toggle'
@@ -50,9 +50,9 @@ const SwitchTheme = () => {
   return (
     <>
       {value ? (
-        <IconSunFill className={styles.icon} onClick={toggle} />
+        <IconSun className={styles.icon} onClick={toggle} />
       ) : (
-        <IconMoonFill className={styles.icon} onClick={toggle} />
+        <IconMoon className={styles.icon} onClick={toggle} />
       )}
     </>
   )
