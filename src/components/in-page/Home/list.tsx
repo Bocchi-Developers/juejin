@@ -142,11 +142,9 @@ export const List = () => {
   }, [router.query])
 
   return (
-    <>
+    <div className={style['bg-wrapper']}>
       <PostNav />
-      <div className={style.divider}>
-        <Divider />
-      </div>
+      <Divider />
 
       {load ? (
         <Skeleton className={style.skeleton} />
@@ -160,6 +158,6 @@ export const List = () => {
           ))}
         </InfiniteScroll>
       )}
-    </>
+    </div>
   )
 }

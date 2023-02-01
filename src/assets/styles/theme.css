@@ -1,6 +1,6 @@
-
 * {
   box-sizing: border-box;
+  transition: color 0.2s, background 0.2s, border 0.2s, box-shadow 0.2s ease-in;
 }
 
 html {
@@ -10,7 +10,10 @@ html {
   -webkit-font-smoothing: unset !important;
   font-family: -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell,
     Noto Sans, sans-serif, BlinkMacSystemFon;
-    overflow: overlay;
+  /*  for firefox */
+  scrollbar-color: var(--juejin-scrollbar) transparent;
+  scrollbar-width: thin;
+  overflow: overlay;
 }
 
 body {
@@ -18,13 +21,33 @@ body {
   background-color: var(--juejin-background);
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: var(--juejin-gray-0);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--juejin-scrollbar);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--juejin-gray-0);
+}
+
 a {
   text-decoration: none;
   color: var(--juejin-font-3);
 }
 
-ul,li {
+ul,
+li {
   list-style: none;
   padding: 0px;
   margin: 0px;
+}
+
+.arco-card {
+  transition: color 0.2s, background 0.2s, border 0.2s, box-shadow 0.2s ease-in !important;
 }

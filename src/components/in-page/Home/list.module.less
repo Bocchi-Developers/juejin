@@ -1,5 +1,6 @@
 .divider {
   padding: 0 20px;
+  // background-color: var(--juejin-background);
 }
 
 .skeleton {
@@ -7,12 +8,14 @@
 }
 .list {
   padding: 10px 20px 0;
-  transition: all 0.1s ease-in;
   color: var(--juejin-font-3);
-
+  background-color: var(--juejin-item-background);
   &.hover:hover {
     background-color: var(--juejin-gray-1-4);
   }
+}
+.bg-wrapper {
+  background-color: var(--juejin-item-background);
 }
 .bar-container {
   display: flex;
@@ -116,6 +119,7 @@
 }
 .nav {
   padding: 10px 0 0 20px;
+  background-color: var(--juejin-item-background);
 }
 .nav-item {
   &.active {
