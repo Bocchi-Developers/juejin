@@ -1,7 +1,18 @@
-import { useEffect, useState } from 'react'
+import rehypeStringify from 'rehype-stringify'
+import classnames from 'remark-class-names'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
+import { unified } from 'unified'
 
-import md2html from '~/utils/md2html'
+// run `node index.js` in the terminal
 
+// TODO 添加类名
+const classname_opts = {
+  classMap: {
+    'heading[depth=1]': 'title',
+    paragraph: 'para',
+  },
+}
 const input = `## 类的设计:
 
 三个大的主类: 读者类,图书类,管理员类
@@ -78,12 +89,16 @@ const input = `## 类的设计:
 ## 质量管控
 
 ## 人员分工`
-export const Article = () => {
-  const [html, setHtml] = useState('')
-  useEffect(() => {
-    md2html(input).then((res) => {
-      setHtml(res.toString())
-    })
-  })
-  return <article dangerouslySetInnerHTML={{ __html: html }} />
+const processor = unified()
+  .use(remarkParse)
+  .use(classnames, classname_opts)
+  .use(remarkRehype)
+  .use(rehypeStringify)
+
+// process.stdin.pipe(stream(processor)).pipe(process.stdout)
+processor.process(input).then((res) => console.log(res.value))
+const md2html = async (md: string) => {
+  const res = processor.process(md).then((res) => res.value)
+  return res
 }
+export default md2html

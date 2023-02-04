@@ -3,6 +3,12 @@
   transition: color 0.2s, background 0.2s, border 0.2s, box-shadow 0.2s ease-in;
 }
 
+/*
+* TODO 优化滚动行为
+*/
+article {
+  scroll-behavior: smooth;
+}
 html {
   font-size: 12px;
   word-break: break-word;
