@@ -13,6 +13,20 @@ const classname_opts = {
     paragraph: 'para',
   },
 }
+function addId() {
+  let index = 0
+  function add_class_names(tree: any) {
+    for (const child of tree.children) {
+      if (child.tagName?.startsWith('h')) {
+        child.properties.id = `heading-${index}`
+        index++
+        console.log(child)
+      }
+    }
+  }
+  index = 0
+  return add_class_names
+}
 const input = `## 类的设计:
 
 三个大的主类: 读者类,图书类,管理员类
