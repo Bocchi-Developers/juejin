@@ -63,7 +63,7 @@ export const Get = <T>(url: string, params?: {}): ApiResponse<T> =>
     axios
       .get(url, { params })
       .then((result) => {
-        resolve(result ? result.data.data : result)
+        resolve(result ? result.data : result)
       })
       .catch((err) => {
         resolve(err)
@@ -79,7 +79,7 @@ export const Post = <T>(
     axios
       .post(url, data, { params })
       .then((result) => {
-        resolve(result ? result.data.data : result)
+        resolve(result ? result.data : result)
       })
       .catch((err) => {
         resolve(err)
@@ -96,7 +96,7 @@ export const Patch = <T>(
     axios
       .patch(url, data, { params })
       .then((result) => {
-        resolve(result ? result.data.data : result)
+        resolve(result ? result.data : result)
       })
       .catch((err) => {
         resolve(err)
