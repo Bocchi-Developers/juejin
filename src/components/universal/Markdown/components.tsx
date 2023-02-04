@@ -3,7 +3,7 @@ import { clsx } from 'clsx'
 import range from 'lodash-es/range'
 import type { MarkdownToJSX } from 'markdown-to-jsx'
 import { compiler } from 'markdown-to-jsx'
-import type { FC, PropsWithChildren } from 'react'
+import type { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react'
 import React, {
   createElement,
   memo,
@@ -15,7 +15,7 @@ import React, {
 
 export interface MdProps {
   value?: string
-
+  setSidebar: Dispatch<SetStateAction<FC<{}>[]>>
   style?: React.CSSProperties
   readonly renderers?: { [key: string]: Partial<MarkdownToJSX.Rule> }
   wrapperProps?: React.DetailedHTMLProps<
@@ -39,7 +39,7 @@ export const Markdown: FC<PropsWithChildren<MdProps & MarkdownToJSX.Options>> =
       overrides,
       extendsRules,
       additionalParserRules,
-
+      setSidebar,
       ...rest
     } = props
 
@@ -139,7 +139,16 @@ export const Markdown: FC<PropsWithChildren<MdProps & MarkdownToJSX.Options>> =
         },
         ...rest,
       })
-
+      if (headings.length > 0) {
+        setSidebar((sidebars) => {
+          if (sidebars.length >= 3) return sidebars
+          return [
+            ...sidebars,
+            () =>
+              props.tocSlot ? createElement(props.tocSlot, { headings }) : null,
+          ]
+        })
+      }
       return mdElement
     }, [
       value,
@@ -161,7 +170,7 @@ export const Markdown: FC<PropsWithChildren<MdProps & MarkdownToJSX.Options>> =
       >
         {className ? <div className={className}>{node}</div> : node}
 
-        {props.tocSlot ? createElement(props.tocSlot, { headings }) : null}
+        {/* {props.tocSlot ? createElement(props.tocSlot, { headings }) : null} */}
       </div>
     )
   })

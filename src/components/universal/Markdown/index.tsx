@@ -1,20 +1,20 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { MarkdownToJSX } from 'markdown-to-jsx'
-import type { FC, PropsWithChildren } from 'react'
+import type { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react'
 import React, { memo, useCallback, useMemo } from 'react'
 
 import { ErrorBoundary } from '~/components/app/ErrorBoundary'
 
+import { MarkdownToc } from './MarkdownToc'
 import { Markdown as JuejinMarkdown } from './components'
 import type { MdProps } from './components'
 import { MHeading } from './renderers/heading'
-
-// import { MarkdownToc } from './MarkdownToc'
 
 const Noop = () => null
 
 export interface KamiMarkdownProps extends MdProps {
   toc?: boolean
+  setSidebar: Dispatch<SetStateAction<FC<{}>[]>>
 }
 export const Markdown: FC<
   PropsWithChildren<KamiMarkdownProps & MarkdownToJSX.Options>
@@ -43,11 +43,24 @@ export const Markdown: FC<
   return (
     <ErrorBoundary fallbackComponent={RenderError}>
       <JuejinMarkdown
-        // tocSlot={props.toc ? MarkdownToc : Noop}
-        tocSlot={Noop}
+        tocSlot={props.toc ? MarkdownToc : Noop}
         value={value}
         {...rest}
         className="markdown-body"
+        extendsRules={{
+          heading: {
+            react(node, output, state) {
+              return (
+                <Heading id={node.id} level={node.level} key={state?.key}>
+                  {output(node.content, state!)}
+                </Heading>
+              )
+            },
+
+            ...extendsRules,
+            ...renderers,
+          },
+        }}
       >
         {props.children}
       </JuejinMarkdown>
