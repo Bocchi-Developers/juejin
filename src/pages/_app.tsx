@@ -1,5 +1,6 @@
 import '@arco-design/web-react/dist/css/arco.css'
 import '~/assets/styles/main.css'
+import '~/assets/styles/juejin.less'
 
 import NextApp from 'next/app'
 import type { AppProps } from 'next/app'

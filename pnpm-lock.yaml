@@ -24,15 +24,18 @@ specifiers:
   less-loader: ^11.1.0
   lint-staged: ^13.1.0
   lodash-es: ^4.17.21
+  markdown-to-jsx: npm:@innei/markdown-to-jsx@7.1.3-beta.2
   mobx: ^6.7.0
   mobx-react-lite: ^3.4.0
   next: 13.1.2
   next-compose-plugins: ^2.2.1
   next-seo: ^5.15.0
+  next-suspense: ^0.1.3
   next-with-less: ^2.0.5
   react: 18.2.0
   react-dom: 18.2.0
   react-infinite-scroller: ^1.2.6
+  react-intersection-observer: ^9.4.1
   react-message-popup: 1.0.0
   rehype-stringify: ^9.0.3
   remark-class-names: ^0.1.0
@@ -54,14 +57,17 @@ dependencies:
   less: 4.1.3
   less-loader: 11.1.0_less@4.1.3
   lodash-es: 4.17.21
+  markdown-to-jsx: /@innei/markdown-to-jsx/7.1.3-beta.2_react@18.2.0
   mobx: 6.7.0
   mobx-react-lite: 3.4.0_jofyzmwkboewm6mjrhi25mngky
   next: 13.1.2_biqbaboplfbrettd7655fr4n2y
   next-seo: 5.15.0_7jnwqgtpcnwg4nzft4b6xlzlfi
+  next-suspense: 0.1.3_next@13.1.2
   next-with-less: 2.0.5_nmio65h2qifc6zowqhsp6ib7zq
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-infinite-scroller: 1.2.6_react@18.2.0
+  react-intersection-observer: 9.4.1_react@18.2.0
   react-message-popup: 1.0.0_biqbaboplfbrettd7655fr4n2y
   rehype-stringify: 9.0.3
   remark-parse: 10.0.1
@@ -592,6 +598,15 @@ packages:
       - eslint-import-resolver-webpack
       - supports-color
     dev: true
+
+  /@innei/markdown-to-jsx/7.1.3-beta.2_react@18.2.0:
+    resolution: {integrity: sha512-4bukfESz2O4vtiaVf62m8a5Ez6Ut21fbSn1sTvwkzdF+cwU1vT2xjXKWHprcd136nVGzIkHaVWM13fIXdXC/iQ==}
+    engines: {node: '>= 10'}
+    peerDependencies:
+      react: '>= 0.14.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@jridgewell/gen-mapping/0.1.1:
     resolution: {integrity: sha512-sQXCasFk+U8lWYEe66WxRDOE9PjVz4vSM51fTu3Hw+ClTpUSQb718772vH3pyS5pShp6lvQM7SxgIDXXXmOX7w==}
@@ -3789,6 +3804,15 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
+  /next-suspense/0.1.3_next@13.1.2:
+    resolution: {integrity: sha512-eo2HImfMlRUsg5t9MmoX0cV0Cdw7jgYbCeGolHHSnmsnT8LN0yVJhRKy+cBJY5DGumPOqRFgEwGiIV1WqpA0Eg==}
+    engines: {pnpm: '>=7'}
+    peerDependencies:
+      next: '>=10'
+    dependencies:
+      next: 13.1.2_biqbaboplfbrettd7655fr4n2y
+    dev: false
+
   /next-with-less/2.0.5_nmio65h2qifc6zowqhsp6ib7zq:
     resolution: {integrity: sha512-1MJDcgFOPucFPCMXV7rTqcWiLI2nLSBi8bA6msvkiNLhYyZMXaFl4MkyYf7eOEUUEtA/c5eD0grPhbcDkrKqPQ==}
     peerDependencies:
@@ -4289,6 +4313,14 @@ packages:
       react: ^0.14.9 || ^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
       prop-types: 15.8.1
+      react: 18.2.0
+    dev: false
+
+  /react-intersection-observer/9.4.1_react@18.2.0:
+    resolution: {integrity: sha512-IXpIsPe6BleFOEHKzKh5UjwRUaz/JYS0lT/HPsupWEQou2hDqjhLMStc5zyE3eQVT4Fk3FufM8Fw33qW1uyeiw==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
       react: 18.2.0
     dev: false
 
