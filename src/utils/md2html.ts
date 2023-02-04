@@ -96,9 +96,8 @@ const processor = unified()
   .use(rehypeStringify)
 
 // process.stdin.pipe(stream(processor)).pipe(process.stdout)
-processor.process(input).then((res) => console.log(res.value))
 const md2html = async (md: string) => {
-  const res = processor.process(md).then((res) => res.value)
-  return res
+  const res = await processor.process(md)
+  return res.toString()
 }
 export default md2html

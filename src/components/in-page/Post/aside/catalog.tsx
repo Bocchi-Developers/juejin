@@ -36,11 +36,11 @@ const HeadingCollection = (node: Element) => {
       break
   }
 }
+// TODO 由于id是js添加的, 刷新之后会从头开始, 所以需要在服务端渲染的时候添加id
 const addHeadingId = (node: Element, index: number) => {
   node.id = `heading-${index}`
 }
 const addObserver = (callback: IntersectionObserverCallback) => {
-  // TODO 由于md转HTML是异步, 在这个时候dom还没有渲染, 所以需要等待一下
   const doms = document.querySelector('article')
   const options = {
     rootMargin: '0px',
