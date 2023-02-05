@@ -37,7 +37,6 @@ const PostView: PageOnlyProps = observer((props) => {
         asideWidth={300}
         padding={32}
       >
-        {/* <Article html={post} /> */}
         <article>
           <h1 className="sr-only">{post.title}</h1>
           <Markdown codeBlockFully value={post.content} toc />

@@ -1,11 +1,8 @@
 import type { CustomEventTypes } from '~/types/events'
 
-import type { EventTypes } from '../types/events'
-
 export class EventEmitter {
   private observers: Record<string, Function[]> = {}
 
-  on(event: EventTypes, handler: any): void
   on(event: CustomEventTypes, handler: any): void
   on(event: string, handler: (...rest: any) => void) {
     const queue = this.observers[event]
@@ -22,7 +19,6 @@ export class EventEmitter {
   }
 
   emit(event: CustomEventTypes, payload?: any): void
-  emit(event: EventTypes, payload?: any): void
   emit(event: string, payload?: any) {
     const queue = this.observers[event]
     if (!queue) {
@@ -34,7 +30,6 @@ export class EventEmitter {
   }
 
   off(event: CustomEventTypes, handler?: (...rest: any) => void)
-  off(event: EventTypes, handler?: (...rest: any) => void)
   off(event: string, handler?: (...rest: any) => void) {
     const queue = this.observers[event]
     if (!queue) {

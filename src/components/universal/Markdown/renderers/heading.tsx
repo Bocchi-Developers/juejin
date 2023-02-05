@@ -20,11 +20,8 @@ interface HeadingProps {
 }
 export const MHeading: () => FC<HeadingProps> = () => {
   let index = 0
-
   const RenderHeading = (props: HeadingProps) => {
     const currentIndex = useMemo(() => index++, [])
-    // TODO  nested children heading
-
     const [id, setId] = useState('')
 
     useEffect(() => {

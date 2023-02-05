@@ -75,39 +75,6 @@ export const Markdown: FC<PropsWithChildren<MdProps & MarkdownToJSX.Options>> =
         },
 
         extendsRules: {
-          gfmTask: {
-            react(node, _, state) {
-              return (
-                <label key={state?.key}>
-                  <input type="checkbox" checked={node.completed} readOnly />
-                </label>
-              )
-            },
-          },
-
-          list: {
-            react(node, output, state) {
-              const Tag = node.ordered ? 'ol' : 'ul'
-
-              return (
-                <Tag key={state?.key} start={node.start}>
-                  {node.items.map((item, i) => {
-                    let className = ''
-                    if (item[0]?.type == 'gfmTask') {
-                      className = 'list-none flex items-center'
-                    }
-
-                    return (
-                      <li className={className} key={i}>
-                        {output(item, state!)}
-                      </li>
-                    )
-                  })}
-                </Tag>
-              )
-            },
-          },
-
           ...extendsRules,
           ...renderers,
         },
