@@ -5,7 +5,7 @@ import React, { memo, useCallback, useMemo } from 'react'
 
 import { ErrorBoundary } from '~/components/app/ErrorBoundary'
 
-import { MarkdownToc } from './MarkdownToc'
+import { MarkdownToc } from '../../in-page/Post/aside/toc'
 import { CodeBlock } from './codeBlock'
 import { Markdown as JuejinMarkdown } from './components'
 import type { MdProps } from './components'

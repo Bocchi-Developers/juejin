@@ -95,6 +95,8 @@
   --juejin-background: #f4f5f5;
   --juejin-background-jscore-radar: #232323;
   --juejin-scrollbar:#c1c1c1;
+  --juejin-toc-text-click: #007fff;
+  --juejin-toc-hover: #f7f8fa;
 }
 
 [arco-theme='dark'] {

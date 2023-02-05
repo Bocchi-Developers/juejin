@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic'
 import type { FC } from 'react'
 
-import { Card } from '../Card'
-import type { TocProps } from '../Toc'
+import { Card } from '../../../universal/Card'
+import type { TocProps } from '../../../universal/Toc'
 
 const Toc = dynamic(
   () => import('~/components/universal/Toc').then((m) => m.Toc),
@@ -13,7 +13,7 @@ const Toc = dynamic(
 
 export const MarkdownToc: FC<TocProps> = (props) => {
   return (
-    <Card>
+    <Card title="目录">
       <Toc {...props} />
     </Card>
   )

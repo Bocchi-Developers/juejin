@@ -1,7 +1,10 @@
+import clsx from 'clsx'
 import type { FC, RefObject } from 'react'
 import { memo, useCallback, useEffect, useMemo, useRef } from 'react'
 
 import { springScrollToElement } from '~/utils/spring'
+
+import styles from './index.module.less'
 
 export const TocItem: FC<{
   title: string
@@ -10,10 +13,19 @@ export const TocItem: FC<{
   rootDepth: number
   onClick: (i: number) => void
   index: number
+  lastPostion: number
   containerRef?: RefObject<HTMLDivElement>
 }> = memo((props) => {
-  const { index, active, depth, title, rootDepth, onClick, containerRef } =
-    props
+  const {
+    index,
+    active,
+    depth,
+    title,
+    rootDepth,
+    onClick,
+    containerRef,
+    lastPostion,
+  } = props
   const $ref = useRef<HTMLAnchorElement>(null)
   useEffect(() => {
     if (active) {
@@ -56,6 +68,11 @@ export const TocItem: FC<{
       ref={$ref}
       data-index={index}
       href={`#${title}`}
+      className={clsx(
+        styles['toc-link'],
+        active && styles['active'],
+        lastPostion === index && styles['last'],
+      )}
       style={useMemo(
         () => ({
           paddingLeft:
@@ -76,7 +93,7 @@ export const TocItem: FC<{
         [index, title, onClick],
       )}
     >
-      <span>{title}</span>
+      <span className={styles['a-pointer']}>{title}</span>
     </a>
   )
 })

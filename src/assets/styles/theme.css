@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  transition: color 0.2s, background 0.2s, border 0.2s, box-shadow 0.2s ease-in;
+  transition: color 0.1s, background 0.1s, border 0.1s, box-shadow 0.1s ease-in;
 }
 
 /*
@@ -10,7 +10,6 @@ article {
   scroll-behavior: smooth;
 }
 html {
-  scroll-padding-top: ;
   font-size: 12px;
   word-break: break-word;
   text-rendering: optimizeLegibility;
@@ -56,5 +55,5 @@ li {
 }
 
 .arco-card {
-  transition: color 0.2s, background 0.2s, border 0.2s, box-shadow 0.2s ease-in !important;
+  transition: color 0.1s, background 0.1s, border 0.1s, box-shadow 0.1s ease-in !important;
 }

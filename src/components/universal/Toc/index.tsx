@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import throttle from 'lodash-es/throttle'
 import type { FC } from 'react'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -5,6 +6,7 @@ import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { CustomEventTypes } from '~/types/events'
 import { eventBus } from '~/utils/event-emitter'
 
+import styles from './index.module.less'
 import { TocItem } from './item'
 
 export type TocProps = {
@@ -83,13 +85,14 @@ export const Toc: FC<TocProps> = memo(
     )
     return (
       <section>
-        <div ref={containerRef}>
+        <div className={clsx(styles['toc'])} ref={containerRef}>
           {headings &&
             headings.map((heading) => {
               return (
                 <MemoedItem
                   containerRef={useAsWeight ? undefined : containerRef}
                   heading={heading}
+                  lastPostion={index}
                   isActive={heading.index === index}
                   onClick={handleItemClick}
                   key={heading.title}
@@ -106,17 +109,20 @@ const MemoedItem = memo<{
   isActive: boolean
   heading: Headings[0]
   rootDepth: number
+  lastPostion: number
   onClick: (i: number) => void
   containerRef: any
 }>(
   (props) => {
-    const { heading, isActive, onClick, rootDepth, containerRef } = props
+    const { heading, isActive, onClick, rootDepth, containerRef, lastPostion } =
+      props
 
     return (
       <TocItem
         containerRef={containerRef}
         index={heading.index}
         onClick={onClick}
+        lastPostion={lastPostion}
         active={isActive}
         depth={heading.depth}
         title={heading.title}
