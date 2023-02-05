@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { MarkdownToJSX } from 'markdown-to-jsx'
-import type { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react'
+import type { FC, PropsWithChildren } from 'react'
 import React, { memo, useCallback, useMemo } from 'react'
 
 import { ErrorBoundary } from '~/components/app/ErrorBoundary'
 
 import { MarkdownToc } from './MarkdownToc'
+import { CodeBlock } from './codeBlock'
 import { Markdown as JuejinMarkdown } from './components'
 import type { MdProps } from './components'
 import { MHeading } from './renderers/heading'
@@ -14,7 +15,6 @@ const Noop = () => null
 
 export interface KamiMarkdownProps extends MdProps {
   toc?: boolean
-  setSidebar: Dispatch<SetStateAction<FC<{}>[]>>
 }
 export const Markdown: FC<
   PropsWithChildren<KamiMarkdownProps & MarkdownToJSX.Options>
@@ -56,10 +56,20 @@ export const Markdown: FC<
                 </Heading>
               )
             },
-
-            ...extendsRules,
-            ...renderers,
           },
+          codeBlock: {
+            react(node, output, state) {
+              return (
+                <CodeBlock
+                  key={state?.key}
+                  content={node.content}
+                  lang={node.lang}
+                />
+              )
+            },
+          },
+          ...extendsRules,
+          ...renderers,
         }}
       >
         {props.children}

@@ -3,19 +3,21 @@ import { clsx } from 'clsx'
 import range from 'lodash-es/range'
 import type { MarkdownToJSX } from 'markdown-to-jsx'
 import { compiler } from 'markdown-to-jsx'
-import type { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react'
+import type { FC, PropsWithChildren } from 'react'
 import React, {
   createElement,
   memo,
+  useContext,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from 'react'
 
+import { SidebarContext } from '~/components/layouts/ArticleLayout'
+
 export interface MdProps {
   value?: string
-  setSidebar: Dispatch<SetStateAction<FC<{}>[]>>
   style?: React.CSSProperties
   readonly renderers?: { [key: string]: Partial<MarkdownToJSX.Rule> }
   wrapperProps?: React.DetailedHTMLProps<
@@ -39,10 +41,9 @@ export const Markdown: FC<PropsWithChildren<MdProps & MarkdownToJSX.Options>> =
       overrides,
       extendsRules,
       additionalParserRules,
-      setSidebar,
       ...rest
     } = props
-
+    const sideBarContext = useContext(SidebarContext)
     const ref = useRef<HTMLDivElement>(null)
     const [headings, setHeadings] = useState<HTMLElement[]>([])
 
@@ -66,24 +67,10 @@ export const Markdown: FC<PropsWithChildren<MdProps & MarkdownToJSX.Options>> =
 
     const node = useMemo(() => {
       if (!value && typeof props.children != 'string') return null
-
       const mdElement = compiler(`${value || props.children}`, {
         wrapper: null,
 
-        // @ts-ignore
         overrides: {
-          // p: MParagraph,
-
-          // thead: MTableHead,
-          // tr: MTableRow,
-          // tbody: MTableBody,
-          // // FIXME: footer tag in raw html will renders not as expected, but footer tag in this markdown lib will wrapper as linkReferer footnotes
-          // footer: MFootNote,
-          // details: MDetails,
-
-          // for custom react component
-          // LinkCard,
-
           ...overrides,
         },
 
@@ -91,10 +78,7 @@ export const Markdown: FC<PropsWithChildren<MdProps & MarkdownToJSX.Options>> =
           gfmTask: {
             react(node, _, state) {
               return (
-                <label
-                  className="inline-flex items-center mr-2"
-                  key={state?.key}
-                >
+                <label key={state?.key}>
                   <input type="checkbox" checked={node.completed} readOnly />
                 </label>
               )
@@ -128,19 +112,14 @@ export const Markdown: FC<PropsWithChildren<MdProps & MarkdownToJSX.Options>> =
           ...renderers,
         },
         additionalParserRules: {
-          // spoilder: SpoilderRule,
-          // mention: MentionRule,
-          // commentAt: CommentAtRule,
-          // mark: MarkRule,
-          // ins: InsertRule,
-          // kateX: KateXRule,
-          // container: ContainerRule,
           ...additionalParserRules,
         },
         ...rest,
       })
-      if (headings.length > 0) {
+      if (headings.length > 0 && sideBarContext?.setSidebar) {
+        const { setSidebar } = sideBarContext
         setSidebar((sidebars) => {
+          if (!sidebars) return
           if (sidebars.length >= 3) return sidebars
           return [
             ...sidebars,
@@ -169,8 +148,6 @@ export const Markdown: FC<PropsWithChildren<MdProps & MarkdownToJSX.Options>> =
         className={clsx(wrapperProps.className)}
       >
         {className ? <div className={className}>{node}</div> : node}
-
-        {/* {props.tocSlot ? createElement(props.tocSlot, { headings }) : null} */}
       </div>
     )
   })

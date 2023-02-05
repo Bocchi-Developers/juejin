@@ -1,6 +1,4 @@
 import { observer } from 'mobx-react-lite'
-import type { FC } from 'react'
-import { useState } from 'react'
 
 import { buildStoreDataLoadableView } from '~/components/app/LoadableView'
 import { wrapperNextPage } from '~/components/app/WrapperNextPage'
@@ -13,9 +11,11 @@ import { store, useStore } from '~/store'
 import type { IPostModel } from '~/types/api/post'
 import { noop } from '~/utils/utils'
 
+const sidebar = [PostAuthor, RelatedPost]
+
 const PostView: PageOnlyProps = observer((props) => {
-  const [sidebar, setSidebar] = useState<FC[]>([PostAuthor, RelatedPost])
   const { postStore } = useStore()
+
   const post: IPostModel = postStore.get(props.id) || noop
   return (
     <>
@@ -35,16 +35,12 @@ const PostView: PageOnlyProps = observer((props) => {
         style={{ marginTop: '7rem', maxWidth: 1140 }}
         aside={sidebar}
         asideWidth={300}
+        padding={32}
       >
         {/* <Article html={post} /> */}
         <article>
           <h1 className="sr-only">{post.title}</h1>
-          <Markdown
-            codeBlockFully
-            value={post.content}
-            toc
-            setSidebar={setSidebar}
-          />
+          <Markdown codeBlockFully value={post.content} toc />
         </article>
       </ArticleLayout>
     </>
