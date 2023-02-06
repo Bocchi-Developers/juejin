@@ -1,14 +1,10 @@
-import { Author } from '~/components/universal/Author'
 import { Card } from '~/components/universal/Card'
+import { Author } from '~/components/widgets/Author'
 
 export const PostAuthor = () => {
   return (
     <Card>
-      <Author
-        avatar="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/mirror-assets/168e0858b6ccfd57fe5~tplv-t2oaga2asx-no-mark:100:100:100:100.awebp"
-        name="掘金酱"
-        intro="❤首席客服君 @ 掘金"
-      />
+      <Author />
     </Card>
   )
 }

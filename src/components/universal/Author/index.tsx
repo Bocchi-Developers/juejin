@@ -7,7 +7,7 @@ interface AuthorProps {
   name: string
   intro: string
 }
-export const Author = (props: AuthorProps) => {
+export const AuthorRank = (props: AuthorProps) => {
   return (
     <>
       <div className={style.container}>

@@ -97,6 +97,8 @@
   --juejin-scrollbar:#c1c1c1;
   --juejin-toc-text-click: #007fff;
   --juejin-toc-hover: #f7f8fa;
+  --juejin-toc-text-color: #000;
+  --juejin-toc-blue: #1e80ff;
 }
 
 [arco-theme='dark'] {

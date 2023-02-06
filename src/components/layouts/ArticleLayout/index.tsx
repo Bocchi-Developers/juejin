@@ -17,20 +17,22 @@ import styles from './index.module.less'
 export interface ArticleLayoutProps
   extends PropsWithChildren<HTMLAttributes<HTMLDivElement>> {
   padding?: CSSProperties['padding']
-  aside?: FC[]
+  aside?: FC<unknown>[]
   asideWidth?: CSSProperties['width']
+  postId: string
 }
 
 export const SidebarContext = createContext<{
   setSidebar: Dispatch<SetStateAction<FC<{}>[] | undefined>>
+  postId: string
 } | null>(null)
 
 export const ArticleLayout: FC<ArticleLayoutProps> = observer(
-  ({ children, aside, asideWidth, padding, ...props }) => {
+  ({ children, aside, asideWidth, padding, postId, ...props }) => {
     const [sidebar, setSidebar] = useState<FC[] | undefined>(aside)
     const { appStore } = useStore()
     return (
-      <SidebarContext.Provider value={{ setSidebar }}>
+      <SidebarContext.Provider value={{ setSidebar, postId }}>
         <main className={styles['main-content']} {...props}>
           <Card
             bodyStyle={{ padding: '0' }}
