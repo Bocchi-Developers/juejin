@@ -9,3 +9,29 @@
   transform: translateZ(0);
   z-index: 200;
 }
+
+
+.nav-list{
+  position: relative;
+  max-width: 960px;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  .nav-item{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 1.5rem;
+    font-size: 1.167rem;
+    color: var(--juejin-text-1);
+    cursor: pointer;
+    &.active{
+      color: var(--juejin-brand-2-hover);
+    }
+    &:hover{
+      color: var(--juejin-brand-2-hover);
+    }
+  }
+}
