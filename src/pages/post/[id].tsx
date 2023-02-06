@@ -10,6 +10,7 @@ import { RelatedPost } from '~/components/in-page/Post/aside/related'
 import { ArticleLayout } from '~/components/layouts/ArticleLayout'
 import { Markdown } from '~/components/universal/Markdown'
 import { Author } from '~/components/widgets/Author'
+import { RequestError } from '~/services/server'
 import { store, useStore } from '~/store'
 import type { IPostModel } from '~/types/api/post'
 import { noop } from '~/utils/utils'
@@ -27,8 +28,8 @@ const PostView: PageOnlyProps = observer((props) => {
         openGraph={{
           type: 'article',
           article: {
-            publishedTime: post.created.toString(),
-            section: post.category.name,
+            publishedTime: post?.created?.toString(),
+            section: post.category?.name,
             tags: post.tags ?? [],
           },
         }}
@@ -59,8 +60,12 @@ const PP = buildStoreDataLoadableView(store.postStore, PostView)
 PP.getInitialProps = async (ctx) => {
   const { query } = ctx
   const { id } = query as any
-  const data = await store.postStore.fetchBySlug(id)
-
+  // FIXME: 韭菜写法
+  const data = (await store.postStore.fetchBySlug(id)) as any
+  console.log('data', data)
+  if (data.status && data.status !== 200) {
+    throw new RequestError(data.status, data.response)
+  }
   return data
 }
 

@@ -53,13 +53,26 @@ axios.interceptors.response.use(
         )
       }
     }
-
-    return Promise.reject(error)
+    const status = response ? response.status : 408
+    return Promise.reject(new RequestError(status, response))
   },
 )
 
+export class RequestError extends Error {
+  response: AxiosError['response']
+  status: number
+  constructor(status, response) {
+    const message = response
+      ? response.data?.message || 'Unknown Error'
+      : 'Request timeout'
+    super(message)
+    this.status = status
+    this.response = response
+  }
+}
+
 export const Get = <T>(url: string, params?: {}): ApiResponse<T> =>
-  new Promise((resolve) => {
+  new Promise((resolve, reject) => {
     axios
       .get(url, { params })
       .then((result) => {
@@ -75,7 +88,7 @@ export const Post = <T>(
   data: unknown,
   params?: {},
 ): ApiResponse<T> => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     axios
       .post(url, data, { params })
       .then((result) => {
@@ -92,7 +105,7 @@ export const Patch = <T>(
   data: unknown,
   params?: {},
 ): ApiResponse<T> => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     axios
       .patch(url, data, { params })
       .then((result) => {
