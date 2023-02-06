@@ -10,7 +10,7 @@ import style from './related.module.less'
 export const RelatedPost = () => {
   const { postStore } = useStore()
   const sideBarContext = useContext(SidebarContext)
-  const post = sideBarContext && postStore.get(sideBarContext.postId)
+  const post = sideBarContext?.postId && postStore.get(sideBarContext.postId)
   if (!post) {
     return <div>render error</div>
   }

@@ -19,12 +19,12 @@ export interface ArticleLayoutProps
   padding?: CSSProperties['padding']
   aside?: FC<unknown>[]
   asideWidth?: CSSProperties['width']
-  postId: string
+  postId?: string
 }
 
 export const SidebarContext = createContext<{
   setSidebar: Dispatch<SetStateAction<FC<{}>[] | undefined>>
-  postId: string
+  postId?: string
 } | null>(null)
 
 export const ArticleLayout: FC<ArticleLayoutProps> = observer(

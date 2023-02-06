@@ -18,7 +18,7 @@ interface IAuthorProps extends HTMLAttributes<HTMLDivElement> {
 export const Author: FC<IAuthorProps> = observer((props) => {
   const { postStore } = useStore()
   const sideBarContext = useContext(SidebarContext)
-  const post = sideBarContext && postStore.get(sideBarContext.postId)
+  const post = sideBarContext?.postId && postStore.get(sideBarContext.postId)
   if (!post) {
     return <div>render error</div>
   }
