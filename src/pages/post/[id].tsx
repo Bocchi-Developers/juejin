@@ -62,7 +62,6 @@ PP.getInitialProps = async (ctx) => {
   const { id } = query as any
   // FIXME: 韭菜写法
   const data = (await store.postStore.fetchBySlug(id)) as any
-  console.log('data', data)
   if (data.status && data.status !== 200) {
     throw new RequestError(data.status, data.response)
   }
