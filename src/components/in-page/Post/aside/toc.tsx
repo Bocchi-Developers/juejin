@@ -13,7 +13,13 @@ const Toc = dynamic(
 
 export const MarkdownToc: FC<TocProps> = (props) => {
   return (
-    <Card title="目录">
+    <Card
+      title="目录"
+      style={{
+        position: 'sticky',
+        top: 85,
+      }}
+    >
       <Toc {...props} />
     </Card>
   )

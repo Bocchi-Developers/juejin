@@ -35,7 +35,7 @@ export const MHeading: () => FC<HeadingProps> = () => {
     }, [])
 
     const { ref } = useInView({
-      rootMargin: '-33% 0% -33% 0%',
+      rootMargin: '0% 0% -85% 0%',
       onChange(inView) {
         if (inView) {
           eventBus.emit(CustomEventTypes.TOC, currentIndex)

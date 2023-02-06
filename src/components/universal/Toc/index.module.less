@@ -3,22 +3,18 @@
   flex-direction: column;
   gap: 10px;
   .toc-link {
-    transition: none;
     position: relative;
     padding: 8px 0;
+    color: var(--juejin-toc-text-color);
     border-radius: 4px;
     &:hover {
       background-color: var(--juejin-toc-hover);
     }
   }
 
-  .active {
-
-  }
   .last {
-    
     background-color: var(--juejin-toc-hover);
-    color: var(--juejin-toc-text-click);
+    color: var(--juejin-font-1);
   }
 
   .active::before {
