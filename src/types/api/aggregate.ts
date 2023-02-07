@@ -40,8 +40,8 @@ interface Ad {
 }
 
 interface Category {
-  _id: string
+  _id?: string
   name: string
   slug: string
-  created: string
+  created?: string
 }

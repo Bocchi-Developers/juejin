@@ -124,6 +124,7 @@ export const List = () => {
       pageCurrent: currentPage,
       pageSize: 15,
       sort: sort as Sort,
+      category: router.query.category as string,
     })
     setPostList((list) => {
       return [...list, ...postListData.postList]

@@ -24,6 +24,7 @@ const Home: NextPage<IAggregateHome> = (props) => {
 
 Home.getInitialProps = async () => {
   const aggregate = await AggregateApi.aggregateHomeRequest(3)
+
   return aggregate
 }
 

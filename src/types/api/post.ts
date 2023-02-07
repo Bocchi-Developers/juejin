@@ -14,6 +14,7 @@ export interface IPostListParam extends IPaginate {
   categoryId?: string
   tag?: string
   sort?: Sort
+  category?: string
 }
 
 export interface IPostListResponse {

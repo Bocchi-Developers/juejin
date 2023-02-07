@@ -10,6 +10,7 @@ import styles from './navbar.module.less'
 export const Navbar = () => {
   const router = useRouter()
   const homeContext = useContext(HomeSidebarContext)
+
   return (
     <nav className={styles['view-nav']}>
       <div className={styles['nav-list']}>
@@ -18,9 +19,14 @@ export const Navbar = () => {
             key={item.name}
             className={clsx(
               styles['nav-item'],
-              router.query.category == item.slug && styles.active,
+              (router.query?.category
+                ? router.query?.category == item.slug
+                : item.slug == '') && styles.active,
             )}
-            href={{ pathname: '/', query: { category: item.slug } }}
+            href={{
+              pathname: '/',
+              query: item.slug != '' ? { category: item.slug } : null,
+            }}
           >
             {item.name}
           </Link>
