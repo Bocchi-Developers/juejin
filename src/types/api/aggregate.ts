@@ -1,6 +1,7 @@
 export interface IAggregate {
   user: User
   seo: Seo
+  tab: TabModule[]
 }
 
 interface Seo {
@@ -20,6 +21,15 @@ interface User {
   introduce: string
 }
 
+export interface TabModule {
+  _id: string
+  title: string
+  created: string
+  tag?: string
+  slug: string
+  updatedAt: string
+}
+
 export interface IAggregateHome {
   category: Category[]
   ad: Ad
@@ -35,7 +45,9 @@ interface AuthorRank {
 
 interface Ad {
   _id: string
+  adHref: string
   phoUrl: string
+  putAdHref: string
   created: string
 }
 

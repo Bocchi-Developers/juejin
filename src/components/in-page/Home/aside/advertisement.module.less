@@ -1,0 +1,25 @@
+.ad {
+  position: relative;
+  div:last-child {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 0.5rem;
+    z-index: 1;
+    padding: 0.5px 5px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 0.5px solid #fff;
+    border-radius: 2px;
+
+    :first-child {
+      display: none;
+    }
+    &:hover :first-child {
+      display: inline;
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
+}

@@ -3,47 +3,17 @@ import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { FC } from 'react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { IconNight, IconSun } from '~/components/universal/Icons/dark-mode'
 import { Logo as JuejinLogo } from '~/components/universal/Logo'
+import { InitialContext } from '~/context/initial-data'
 import { useMediaToggle } from '~/hooks/use-media-toggle'
 import { useStore } from '~/store'
+import type { TabModule } from '~/types/api/aggregate'
 
 import styles from './index.module.less'
 
-interface TabItemProps {
-  text: string
-  active?: boolean
-  promoteText?: string
-}
-const Tabs = [
-  {
-    text: '首页',
-    promoteText: '',
-    path: '/',
-  },
-  {
-    text: '沸点',
-    promoteText: '',
-  },
-  {
-    text: '直播',
-    promoteText: '',
-  },
-  {
-    text: '课程',
-    promoteText: '小册上新',
-  },
-  {
-    text: '活动',
-    promoteText: '',
-  },
-  {
-    text: 'app',
-    promoteText: '邀请有利',
-  },
-]
 export const SwitchTheme = () => {
   const { toggle, value } = useMediaToggle()
   return (
@@ -53,18 +23,20 @@ export const SwitchTheme = () => {
   )
 }
 
-const TabItem: FC<TabItemProps> = (props) => {
+const TabItem: FC<TabModule> = ({ slug, title, tag }) => {
+  const router = useRouter()
   return (
     <Link
       className={clsx(
         styles['tab-item'],
-        props.active && styles['active'],
-        !props.promoteText && styles['before-hidden'],
+        (router.pathname == `/${slug}` || (!slug && router.pathname == '/')) &&
+          styles['active'],
+        !tag && styles['before-hidden'],
       )}
-      data-promote={props.promoteText?.slice(0, 5)}
-      href="/"
+      data-promote={tag?.slice(0, 5)}
+      href={''}
     >
-      {props.text}
+      {title}
     </Link>
   )
 }
@@ -73,8 +45,7 @@ const Header = observer(() => {
     appStore: { isNarrowThanLaptop, viewport },
   } = useStore()
   const [hidden, setHidden] = useState(true)
-
-  const router = useRouter()
+  const { tab } = useContext(InitialContext)
   return (
     <header className={styles['main-header']}>
       <div className={styles.wrapper}>
@@ -93,7 +64,7 @@ const Header = observer(() => {
                 setHidden((pre) => !pre)
               }}
             >
-              首页
+              {tab[0].title}
             </div>
           )}
 
@@ -104,12 +75,8 @@ const Header = observer(() => {
                 isNarrowThanLaptop && styles['tab-mobile'],
               )}
             >
-              {Tabs.map((tab) => (
-                <TabItem
-                  key={tab.text}
-                  active={router.pathname == tab.path}
-                  {...tab}
-                />
+              {tab.map((tab) => (
+                <TabItem key={tab._id} {...tab} />
               ))}
             </div>
           )}
