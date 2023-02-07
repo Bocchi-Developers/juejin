@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
-import type { FC, HTMLAttributes, ReactNode } from 'react'
+import type { CSSProperties, FC, HTMLAttributes, ReactNode } from 'react'
 
 import { Avatar } from '@arco-design/web-react'
 
@@ -11,10 +11,11 @@ import styles from './index.module.less'
 interface IAuthorProps extends HTMLAttributes<HTMLDivElement> {
   description?: ReactNode
   user: Pick<UserModel, 'username' | 'avatar'>
+  usernameStyle?: CSSProperties
 }
 
 export const Author: FC<IAuthorProps> = observer(
-  ({ description, user, ...rest }) => {
+  ({ description, user, usernameStyle, ...rest }) => {
     return (
       <div className={styles.author} {...rest}>
         <Link href="#!">
@@ -23,7 +24,9 @@ export const Author: FC<IAuthorProps> = observer(
           </Avatar>
         </Link>
         <div className={styles['author-info']}>
-          <Link href={'#!'}>{user.username}</Link>
+          <Link href={'#!'} style={usernameStyle}>
+            {user.username}
+          </Link>
           {description}
         </div>
       </div>

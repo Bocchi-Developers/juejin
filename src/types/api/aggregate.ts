@@ -29,8 +29,8 @@ export interface IAggregateHome {
 interface AuthorRank {
   _id: string
   username: string
-  avatar?: string
-  introduce?: string
+  avatar: string
+  introduce: string
 }
 
 interface Ad {
