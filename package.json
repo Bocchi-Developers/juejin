@@ -32,7 +32,7 @@
     ],
     "publish": false,
     "tag": true,
-    "commit_message": "chore(release): bump @suemor/suemor-blog to v${NEW_VERSION}"
+    "commit_message": "chore(release): bump @Bocchi-Developers/juejin to v${NEW_VERSION}"
   },
   "scripts": {
     "prepare": "husky install",
