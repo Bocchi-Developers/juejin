@@ -13,6 +13,7 @@ import { Author } from '~/components/widgets/Author'
 import { RequestError } from '~/services/server'
 import { store, useStore } from '~/store'
 import type { IPostModel } from '~/types/api/post'
+import { parseDate } from '~/utils/time'
 import { noop } from '~/utils/utils'
 
 const sidebar = [PostAuthor, RelatedPost]
@@ -45,7 +46,16 @@ const PostView: PageOnlyProps = observer((props) => {
           <h1 className="sr-only" style={{ fontSize: '2.66rem' }}>
             {post.title}
           </h1>
-          <Author inPost {...props} />
+          <Author
+            user={post.user}
+            style={{ margin: '1.5em 0' }}
+            description={
+              <div>
+                <time>{parseDate(post.created, 'YYYY年MM月DD日 HH:mm')}</time>
+                <span>&nbsp;&nbsp;·&nbsp;&nbsp;阅读 {post?.read}</span>
+              </div>
+            }
+          />
           {post.cover && <Image src={post?.cover} alt={'cover'} width="100%" />}
 
           <Markdown codeBlockFully value={post.content} toc />
