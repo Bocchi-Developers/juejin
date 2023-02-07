@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { useContext } from 'react'
 
 import styles from '~/components/in-page/Home/aside/author.module.less'
@@ -11,7 +10,13 @@ export const AuthorRecommend = () => {
   return (
     <Card title="🎖️作者榜" bodyStyle={{ padding: 0 }}>
       {homeContext?.authorRank.map((user) => (
-        <Link className={styles.wrapper} key={user._id} href="#!">
+        <div
+          className={styles.wrapper}
+          key={user._id}
+          // 这里不使用 Link 组件，因为 Author 里也有 Link，防止发生 hydration
+          // https://github.com/vercel/next.js/discussions/35773#discussioncomment-3985369
+          onClick={() => window.open('', '_ blank')}
+        >
           <Author
             user={user}
             description={
@@ -20,7 +25,7 @@ export const AuthorRecommend = () => {
             usernameStyle={{ fontSize: '1.16rem' }}
             style={{ padding: '1rem' }}
           />
-        </Link>
+        </div>
       ))}
     </Card>
   )
