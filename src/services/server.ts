@@ -1,4 +1,4 @@
-import type { AxiosError } from 'axios'
+import type { AxiosError, AxiosResponse } from 'axios'
 import axios, { CanceledError } from 'axios'
 import message from 'react-message-popup'
 
@@ -54,6 +54,7 @@ axios.interceptors.response.use(
       }
     }
     const status = response ? response.status : 408
+
     return Promise.reject(new RequestError(status, response))
   },
 )
@@ -61,7 +62,7 @@ axios.interceptors.response.use(
 export class RequestError extends Error {
   response: AxiosError['response']
   status: number
-  constructor(status, response) {
+  constructor(status: number, response: AxiosResponse | undefined) {
     const message = response
       ? response.data?.message || 'Unknown Error'
       : 'Request timeout'
