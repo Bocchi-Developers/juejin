@@ -1,0 +1,31 @@
+.toc {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .toc-link {
+    position: relative;
+    padding: 8px 0;
+    color: var(--juejin-font-1);
+    border-radius: 4px;
+    &:hover {
+      background-color: var(--juejin-toc-hover);
+    }
+  }
+
+  .last {
+    background-color: var(--juejin-toc-hover);
+    color: var(--juejin-toc-blue);
+  }
+
+  .active::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 0;
+    margin-top: 7px;
+    width: 4px;
+    height: 16px;
+    background: var(--juejin-toc-blue);
+    border-radius: 0 4px 4px 0;
+  }
+}

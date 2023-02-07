@@ -1,0 +1,21 @@
+.author {
+  display: flex;
+  gap: 0.8em;
+  &-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    > a {
+      color: var(--juejin-font-1);
+      font-weight: 500;
+      display: inline-block;
+      vertical-align: top;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 1.333rem;
+      font-weight: 500;
+    }
+  }
+}

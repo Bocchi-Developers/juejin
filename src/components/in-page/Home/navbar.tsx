@@ -1,41 +1,26 @@
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useContext } from 'react'
+
+import { HomeSidebarContext } from '~/pages'
 
 import styles from './navbar.module.less'
 
-const allNav = [
-  {
-    name: ' 综合',
-    category: 'recommended',
-  },
-  {
-    name: 'IOS',
-    category: 'ios',
-  },
-  {
-    name: ' 前端',
-    category: 'frontend',
-  },
-  {
-    name: ' 后端',
-    category: 'backend',
-  },
-]
-
 export const Navbar = () => {
   const router = useRouter()
+  const homeContext = useContext(HomeSidebarContext)
   return (
     <nav className={styles['view-nav']}>
       <div className={styles['nav-list']}>
-        {allNav.map((item) => (
+        {homeContext?.category.map((item) => (
           <Link
             key={item.name}
             className={clsx(
               styles['nav-item'],
-              router.query.category == item.category && styles.active,
+              router.query.category == item.slug && styles.active,
             )}
-            href={{ pathname: '/', query: { category: item.category } }}
+            href={{ pathname: '/', query: { category: item.slug } }}
           >
             {item.name}
           </Link>

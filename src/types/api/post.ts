@@ -24,6 +24,7 @@ export interface IPostListResponse {
 
 export interface IPostList {
   _id: string
+  id: string
   title: string
   tags: string[]
   category: Category
@@ -32,6 +33,11 @@ export interface IPostList {
   created: Date
   content: string
   ad: boolean
+  read: number
+}
+
+export interface IPostModel extends IPostList {
+  related: IPostList[]
 }
 
 interface Category {

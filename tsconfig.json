@@ -46,5 +46,5 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ]
+, "src/utils/md2html.ts"  ]
 }

@@ -1,13 +1,26 @@
-import { Author } from '~/components/universal/Author'
+import { useContext } from 'react'
+
+import { SidebarContext } from '~/components/layouts/ArticleLayout'
 import { Card } from '~/components/universal/Card'
+import { Author } from '~/components/widgets/Author'
+import { useStore } from '~/store'
+
+import styles from './author.module.less'
 
 export const PostAuthor = () => {
+  const { postStore } = useStore()
+  const sideBarContext = useContext(SidebarContext)
+  const post = sideBarContext?.postId && postStore.get(sideBarContext.postId)
+  if (!post) {
+    return <div>render error</div>
+  }
   return (
     <Card>
       <Author
-        avatar="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/mirror-assets/168e0858b6ccfd57fe5~tplv-t2oaga2asx-no-mark:100:100:100:100.awebp"
-        name="掘金酱"
-        intro="❤首席客服君 @ 掘金"
+        user={post.user}
+        description={
+          <span className={styles.introduce}>{post?.user.introduce}</span>
+        }
       />
     </Card>
   )

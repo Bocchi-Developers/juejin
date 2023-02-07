@@ -1,4 +1,4 @@
-import type { AxiosError } from 'axios'
+import type { AxiosError, AxiosResponse } from 'axios'
 import axios, { CanceledError } from 'axios'
 import message from 'react-message-popup'
 
@@ -53,13 +53,27 @@ axios.interceptors.response.use(
         )
       }
     }
+    const status = response ? response.status : 408
 
-    return Promise.reject(error)
+    return Promise.reject(new RequestError(status, response))
   },
 )
 
+export class RequestError extends Error {
+  response: AxiosError['response']
+  status: number
+  constructor(status: number, response: AxiosResponse | undefined) {
+    const message = response
+      ? response.data?.message || 'Unknown Error'
+      : 'Request timeout'
+    super(message)
+    this.status = status
+    this.response = response
+  }
+}
+
 export const Get = <T>(url: string, params?: {}): ApiResponse<T> =>
-  new Promise((resolve) => {
+  new Promise((resolve, reject) => {
     axios
       .get(url, { params })
       .then((result) => {
@@ -75,7 +89,7 @@ export const Post = <T>(
   data: unknown,
   params?: {},
 ): ApiResponse<T> => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     axios
       .post(url, data, { params })
       .then((result) => {
@@ -92,7 +106,7 @@ export const Patch = <T>(
   data: unknown,
   params?: {},
 ): ApiResponse<T> => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     axios
       .patch(url, data, { params })
       .then((result) => {
