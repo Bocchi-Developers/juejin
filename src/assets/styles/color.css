@@ -94,7 +94,7 @@
   --juejin-font-priv-hint: #916be1;
   --juejin-background: #f4f5f5;
   --juejin-background-jscore-radar: #232323;
-  --juejin-scrollbar:#c1c1c1;
+  --juejin-scrollbar: #c1c1c1;
   --juejin-toc-text-click: #007fff;
   --juejin-toc-hover: #f7f8fa;
   --juejin-toc-text-color: #000;
@@ -112,4 +112,6 @@
   --juejin-navigation: #121212;
   --juejin-gray-0: #222323;
   --juejin-gray-2: #191919;
+  --juejin-toc-blue: #2885ff;
+  --juejin-toc-hover: #202022;
 }

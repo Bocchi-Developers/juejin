@@ -7,10 +7,11 @@ export const Card: FC<CardProps> = (props) => {
   return (
     <ArcoCard
       bordered={false}
+      {...props}
       style={{
         backgroundColor: 'var(--juejin-item-background)',
+        ...props.style,
       }}
-      {...props}
     />
   )
 }

@@ -1,22 +1,46 @@
+:root {
+  --juejin-md-font: #595959;
+  --juejin-md-heading: #135ce0;
+  --juejin-md-spcial-font: #036aca;
+  --juejin-md-quote-bg: #fff9f9;
+  --juejin-md-quote-font: #666;
+  --juejin-md-quote-left: #b2aec5;
+  --juejin-md-code-bg: #fff5f5;
+  --juejin-md-code-font: #ff502c;
+  --juejin-md-bg-linear: rgba(60, 10, 30, 0.04) 3%, rgba(0, 0, 0, 0) 3%;
+}
+[arco-theme='dark'] {
+  --juejin-md-font: #b1b1b1;
+  --juejin-md-heading: #7e9eff;
+  --juejin-md-spcial-font: #65a1ff;
+  --juejin-md-quote-bg: #221e1e;
+  --juejin-md-quote-font: #828181;
+  --juejin-md-quote-left: #666471;
+  --juejin-md-code-bg: #261f1f;
+  --juejin-md-code-font: hsl(8, 81%, 60%);
+  --juejin-md-bg-linear: rgba(52, 50, 51, 0.263) 3%, rgba(0, 0, 0, 0) 3%;
+}
 .markdown-body {
-  color: #595959;
+  color: var(--juejin-md-font);
   font-size: 15px;
-  font-family: -apple-system,system-ui,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
-  background-image: linear-gradient(90deg, rgba(60, 10, 30, 0.04) 3%, rgba(0, 0, 0, 0) 3%), linear-gradient(360deg, rgba(60, 10, 30, 0.04) 3%, rgba(0, 0, 0, 0) 3%);
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, Helvetica Neue,
+    PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+  background-image: linear-gradient(90deg, var(--juejin-md-bg-linear)),
+    linear-gradient(360deg, var(--juejin-md-bg-linear));
   background-size: 20px 20px;
   background-position: center center;
 }
 
 /* 段落 */
 .markdown-body p {
-  color: #595959;
+  color: var(--juejin-md-font);
   font-size: 15px;
   line-height: 2;
   font-weight: 400;
 }
 
 /* 段落间距控制 */
-.markdown-body p+p {
+.markdown-body p + p {
   margin-top: 16px;
 }
 
@@ -29,7 +53,7 @@
 .markdown-body h6 {
   padding: 30px 0;
   margin: 0;
-  color: #135ce0;
+  color: var(--juejin-md-heading);
 }
 
 /* 一级标题 */
@@ -43,14 +67,14 @@
 /* 一级标题前缀，用来放背景图，支持透明度控制 */
 .markdown-body h1:before {
   position: absolute;
-  content: "";
+  content: '';
   top: -10px;
   left: 50%;
   width: 32px;
   height: 32px;
   transform: translateX(-50%);
   background-size: 100% 100%;
-  opacity: .36;
+  opacity: 0.36;
   background-repeat: no-repeat;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABfVBMVEX///8Ad/8AgP8AgP8AgP8Aff8AgP8Af/8AgP8AVf8Af/8Af/8AgP8AgP8Af/8Afv8AAP8Afv8Afv8Aef8AgP8AdP8Afv8AgP8AgP8Acf8Ae/8AgP8Af/8AgP8Af/8Af/8AfP8Afv8AgP8Af/8Af/8Afv8Afv8AgP8Afv8AgP8Af/8Af/8AgP8AgP8Afv8AgP8Af/8AgP8AgP8AgP8Ae/8Afv8Af/8AgP8Af/8AgP8Af/8Af/8Aff8Af/8Abf8AgP8Af/8AgP8Af/8Af/8Afv8AgP8AgP8Afv8Afv8AgP8Af/8Aff8AgP8Afv8AgP8Aff8AgP8AfP8AgP8Ae/8AgP8Af/8AgP8AgP8AgP8Afv8AgP8AgP8AgP8Afv8AgP8AgP8AgP8AgP8AgP8Af/8AgP8Af/8Af/8Aev8Af/8AgP8Aff8Afv8AgP8AgP8AgP8Af/8AgP8Af/8Af/8AgP8Afv8AgP8AgP8AgP8AgP8Af/8AeP8Af/8Af/8Af//////rzEHnAAAAfXRSTlMAD7CCAivatxIDx5EMrP19AXdLEwgLR+6iCR/M0yLRzyFF7JupSXn8cw6v60Q0QeqzKtgeG237HMne850/6Qeq7QaZ+WdydHtj+OM3qENCMRYl1B3K2U7wnlWE/mhlirjkODa9FN/BF7/iNV/2kASNZpX1Wlf03C4stRGxgUPclqoAAAABYktHRACIBR1IAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gEaBzgZ4yeM3AAAAT9JREFUOMvNUldbwkAQvCAqsSBoABE7asSOBRUVVBQNNuy9996789+9cMFAMHnVebmdm+/bmdtbQv4dOFOW2UjPzgFyLfo6nweKfIMOBYWwFtmMPGz2Yj2pJI0JDq3udJW6VVbmKa9I192VQFV1ktXUAl5NB0cd4KpnORqsEO2ZIRpF9gJfE9Dckqq0KuZt7UAH5+8EPF3spjsRpCeQNO/tA/qDwIDA+OCQbBoKA8NOdjMySgcZGVM6jwcgRuUiSs0nlPFNSrEpJfU0jTLD6llqbvKxei7OzvkFNQohi0vAsj81+MoqsCaoPOQFgus/1LyxichW+hS2JWCHZ7VlF9jb187pIAYcHiViHAMnp5mTjJ8B5xeEXF4B1ze/fTh/C0h398DDI9HB07O8ci+vRBdvdGnfP4gBuM8vw7X/G3wDmFhFZEdxzjMAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTgtMDEtMjZUMDc6NTY6MjUrMDE6MDA67pVWAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE4LTAxLTI2VDA3OjU2OjI1KzAxOjAwS7Mt6gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAWdEVYdFRpdGxlAGp1ZWppbl9sb2dvIGNvcHlxapmKAAAAV3pUWHRSYXcgcHJvZmlsZSB0eXBlIGlwdGMAAHic4/IMCHFWKCjKT8vMSeVSAAMjCy5jCxMjE0uTFAMTIESANMNkAyOzVCDL2NTIxMzEHMQHy4BIoEouAOoXEXTyQjWVAAAAAElFTkSuQmCC);
 }
@@ -58,7 +82,7 @@
 /* 二级标题 */
 .markdown-body h2 {
   position: relative;
-	font-size: 20px;
+  font-size: 20px;
   border-left: 4px solid;
   padding: 0 0 0 10px;
   margin: 30px 0;
@@ -73,10 +97,10 @@
   word-break: break-word;
   border-radius: 2px;
   overflow-x: auto;
-  background-color: #fff5f5;
-  color: #ff502c;
+  background-color: var(--juejin-md-code-bg);
+  color: var(--juejin-md-code-font);
   font-size: 15px;
-  padding: .065em .4em;
+  padding: 0.065em 0.4em;
 }
 
 /* 无序列表 */
@@ -106,34 +130,34 @@
 
 /* 引用 */
 .markdown-body blockquote {
-  background: #fff9f9;
+  background: var(--juejin-md-quote-bg);
   margin: 2em 0;
   padding: 2px 20px;
-  border-left: 4px solid #b2aec5;
+  border-left: 4px solid var(--juejin-md-quote-left);
 }
 
 /* 引用文字 */
 .markdown-body blockquote p {
-  color: #666;
+  color: var(--juejin-md-quote-font);
   line-height: 2;
 }
 
 /* 链接 */
 .markdown-body a {
-  color: #036aca;
-  border-bottom: 1px solid rgba(3, 106, 202, .8);
+  color: var(--juejin-md-spcial-font);
+  border-bottom: 1px solid rgba(3, 106, 202, 0.8);
   font-weight: 400;
   text-decoration: none;
 }
 
 /* 加粗 */
 .markdown-body strong {
-  color: #036aca;
+  color: var(--juejin-md-spcial-font);
 }
 
 /* 加粗斜体 */
 .markdown-body em strong {
-  color: #036aca;
+  color: var(--juejin-md-spcial-font);
 }
 
 /* 分隔线 */
@@ -146,8 +170,6 @@
   overflow: auto;
 }
 
-
-
 /* 表格 */
 .markdown-body table {
   border-collapse: collapse;
@@ -158,7 +180,7 @@
 .markdown-body table th,
 .markdown-body table td {
   border: 1px solid #dfe2e5;
-  padding: .6em 1em;
+  padding: 0.6em 1em;
 }
 
 .markdown-body table tr {
