@@ -7,6 +7,7 @@ import { HomeSidebarContext } from '~/pages'
 
 export const AuthorRecommend = () => {
   const homeContext = useContext(HomeSidebarContext)
+
   return (
     <Card title="🎖️作者榜" bodyStyle={{ padding: 0 }}>
       {homeContext?.authorRank.map((user) => (
