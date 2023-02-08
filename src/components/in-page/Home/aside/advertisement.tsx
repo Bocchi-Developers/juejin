@@ -18,8 +18,8 @@ export const Advertisement = () => {
       href={homeContext.ad?.adHref || ''}
       target="_blank"
       className={clsx(
-        sidebarContex?.asideLeave ? styles['sidebar-opacity'] : '',
-        sidebarContex?.leaveShow ? styles['sidebar-show'] : '',
+        sidebarContex?.asideLeave ? 'sidebar-opacity' : '',
+        sidebarContex?.leaveShow ? 'sidebar-show' : '',
       )}
     >
       <div className={styles.ad}>

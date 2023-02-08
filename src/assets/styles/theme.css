@@ -66,3 +66,20 @@ h1 {
 .nav-move {
   transform: translate3d(0, -5rem, 0);
 }
+
+p {
+	margin: 0;
+	padding: 0;
+}
+
+.sidebar-show {
+  position: fixed;
+  width: 240px;
+  top: 67px;
+  opacity: 1 !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar-opacity {
+  opacity: 0;
+}

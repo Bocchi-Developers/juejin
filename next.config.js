@@ -10,7 +10,7 @@ const plugins = [bundleAnalyzer, withLess]
 const bookstairsConfig = {
   reactStrictMode: false,
   images: {
-    domains: ['qiniu.suemor.com'],
+    domains: ['qiniu.suemor.com', 'y.suemor.com'],
   },
 }
 
