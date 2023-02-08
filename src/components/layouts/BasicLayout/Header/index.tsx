@@ -56,7 +56,13 @@ const Header = observer(() => {
         <div className={styles['header-container']}>
           <Link className={styles.logo} href="/">
             <JuejinLogo />
-            {!viewport.mobile && <JuejinFont />}
+            <div style={{ marginTop: '5px' }}>
+              {!viewport.mobile && (
+                <JuejinFont
+                  fill={appStore.colorMode == 'dark' ? 'white' : 'black'}
+                />
+              )}
+            </div>
           </Link>
           {isNarrowThanLaptop && (
             <div
