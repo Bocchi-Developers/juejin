@@ -1,18 +1,20 @@
 import clsx from 'clsx'
+import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import { HomeSidebarContext } from '~/pages'
+import { useStore } from '~/store'
 
 import styles from './navbar.module.less'
 
-export const Navbar = () => {
+export const Navbar = observer(() => {
   const router = useRouter()
   const homeContext = useContext(HomeSidebarContext)
-
+  const { appStore } = useStore()
   return (
-    <nav className={styles['view-nav']}>
+    <nav className={clsx(styles['view-nav'], appStore.isOverNar && 'nav-move')}>
       <div className={styles['nav-list']}>
         {homeContext?.category.map((item) => (
           <Link
@@ -34,4 +36,4 @@ export const Navbar = () => {
       </div>
     </nav>
   )
-}
+})

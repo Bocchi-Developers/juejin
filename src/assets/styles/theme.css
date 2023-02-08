@@ -62,3 +62,7 @@ h1 {
 .arco-card {
   transition: color 0.1s, background 0.1s, border 0.1s, box-shadow 0.1s ease-in !important;
 }
+
+.nav-move {
+  transform: translate3d(0, -5rem, 0);
+}

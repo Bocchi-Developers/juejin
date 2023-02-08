@@ -46,8 +46,11 @@ const Header = observer(() => {
   } = useStore()
   const [hidden, setHidden] = useState(true)
   const { tab } = useContext(InitialContext)
+  const { appStore } = useStore()
   return (
-    <header className={styles['main-header']}>
+    <header
+      className={clsx(styles['main-header'], appStore.isOverNar && 'nav-move')}
+    >
       <div className={styles.wrapper}>
         <div className={styles['header-container']}>
           <Link className={styles.logo} href="/">

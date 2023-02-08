@@ -20,7 +20,6 @@ export const BasicLayout: FC<PropsWithChildren> = observer(({ children }) => {
         $el && springScrollToElement($el, 1000, -window.innerHeight / 2 + 100)
       }, 1050)
     }
-
     window.onresize = () => {
       store.appUIStore.updateViewport()
     }
