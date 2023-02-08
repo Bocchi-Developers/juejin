@@ -95,6 +95,9 @@ const ListItem = ({ item }: { item: IPostList }) => (
 )
 const PostNav = () => {
   const router = useRouter()
+
+  const { category, sort } = router.query
+
   return (
     <nav className={style.nav}>
       {tab.map((item) => (
@@ -104,7 +107,12 @@ const PostNav = () => {
             style['nav-item'],
             router.query.sort == item.query?.sort && style.active,
           )}
-          href={{ pathname: '/', query: { ...router.query, ...item.query } }}
+          href={{
+            pathname: '/',
+            query: item.query
+              ? { ...router.query, ...item.query }
+              : { category },
+          }}
           shallow
         >
           {item.name}
