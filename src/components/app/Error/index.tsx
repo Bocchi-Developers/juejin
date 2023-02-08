@@ -2,6 +2,8 @@ import isNumber from 'lodash-es/isNumber'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
+import { Button, Space } from '@arco-design/web-react'
+
 import { Seo } from '~/components/biz/Seo'
 import { isServerSide } from '~/utils/env'
 
@@ -33,7 +35,7 @@ export const ErrorView: NextPage<{
   statusCode: number | string
   showBackButton?: boolean
   showRefreshButton?: boolean
-  description?: string | JSX.Element
+  description?: string | JSX.Element | number
 
   // 适用于无数据状态
   noSeo?: boolean
@@ -45,7 +47,10 @@ export const ErrorView: NextPage<{
   noSeo = false,
 }) => {
   const router = useRouter()
-  const message = errorToText(isNumber(statusCode) ? isNumber(statusCode) : 500)
+
+  const message = errorToText(
+    isNumber(statusCode) ? (statusCode as number) : 500,
+  )
   return (
     <div className={styles['error']}>
       {!noSeo && <Seo title={message} />}
@@ -56,18 +61,18 @@ export const ErrorView: NextPage<{
         </div>
       </div>
       {(showBackButton || showBackButton) && (
-        <div className="mt-5">
+        <Space style={{ marginTop: '1rem' }}>
           {showBackButton && (
-            <button className={'btn red mr-3'} onClick={() => router.push('/')}>
+            <Button type="outline" onClick={() => router.push('/')}>
               回到首页
-            </button>
+            </Button>
           )}
           {showRefreshButton && (
-            <button className={'btn yellow'} onClick={() => router.reload()}>
+            <Button type="outline" onClick={() => router.reload()}>
               刷新
-            </button>
+            </Button>
           )}
-        </div>
+        </Space>
       )}
     </div>
   )

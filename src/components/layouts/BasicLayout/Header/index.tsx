@@ -6,7 +6,7 @@ import type { FC } from 'react'
 import { useContext, useState } from 'react'
 
 import { IconNight, IconSun } from '~/components/universal/Icons/dark-mode'
-import { Logo as JuejinLogo } from '~/components/universal/Logo'
+import { JuejinFont, Logo as JuejinLogo } from '~/components/universal/Logo'
 import { InitialContext } from '~/context/initial-data'
 import { useMediaToggle } from '~/hooks/use-media-toggle'
 import { useStore } from '~/store'
@@ -55,7 +55,7 @@ const Header = observer(() => {
         <div className={styles['header-container']}>
           <Link className={styles.logo} href="/">
             <JuejinLogo />
-            {!viewport.mobile && <span>稀土掘金</span>}
+            {!viewport.mobile && <JuejinFont />}
           </Link>
           {isNarrowThanLaptop && (
             <div

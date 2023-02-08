@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+
 import { clsx } from 'clsx'
 import range from 'lodash-es/range'
 import type { MarkdownToJSX } from 'markdown-to-jsx'
@@ -13,6 +14,8 @@ import React, {
   useRef,
   useState,
 } from 'react'
+
+import { Image } from '@arco-design/web-react'
 
 import { SidebarContext } from '~/components/layouts/ArticleLayout'
 
@@ -71,6 +74,7 @@ export const Markdown: FC<PropsWithChildren<MdProps & MarkdownToJSX.Options>> =
         wrapper: null,
 
         overrides: {
+          img: Image,
           ...overrides,
         },
 
