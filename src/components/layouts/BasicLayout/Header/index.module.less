@@ -7,7 +7,7 @@
   left: 0;
   right: 0;
   z-index: 250;
-  
+
   .wrapper {
     margin: auto;
     max-width: 1440px;
@@ -51,18 +51,21 @@
   position: relative;
   &::before {
     content: attr(data-promote) '';
-    height: 1.5rem;
-    line-height: 1.5rem;
+    height: 16px;
+    line-height: 16px;
     white-space: nowrap;
-    font-size: 0.75rem;
-    padding: 0 0.25rem;
+    font-size: 16px;
+    padding: 0.25rem 0.55rem;
     color: var(--juejin-font-white);
+    width: -moz-fit-content;
     width: fit-content;
     background-color: var(--juejin-coupon_1_button);
-    border-radius: 0.75rem;
+    border-radius: calc(16px + 0.25rem);
     position: absolute;
+    font-weight: 500;
     top: 10%;
-    left: 50%;
+    left: -12.5%;
+    transform: scale(0.5);
     // opacity: if($width<0.25rem, 1, $width);
   }
   &:hover {
