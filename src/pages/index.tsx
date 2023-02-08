@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import { createContext } from 'react'
 
 import { Advertisement } from '~/components/in-page/Home/aside/advertisement'
-import { AppDownload } from '~/components/in-page/Home/aside/appDownLoad'
+import { AppDownload } from '~/components/in-page/Home/aside/appDownload'
 import { AuthorRecommend } from '~/components/in-page/Home/aside/author'
 import { List } from '~/components/in-page/Home/list'
 import { Navbar } from '~/components/in-page/Home/navbar'
