@@ -29,6 +29,7 @@ export const Navbar = observer(() => {
               pathname: '/',
               query: item.slug != '' ? { category: item.slug } : null,
             }}
+            shallow
           >
             {item.name}
           </Link>

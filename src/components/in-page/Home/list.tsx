@@ -105,6 +105,7 @@ const PostNav = () => {
             router.query.sort == item.query?.sort && style.active,
           )}
           href={{ pathname: '/', query: { ...router.query, ...item.query } }}
+          shallow
         >
           {item.name}
         </Link>

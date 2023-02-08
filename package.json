@@ -63,6 +63,7 @@
     "mobx": "^6.7.0",
     "mobx-react-lite": "^3.4.0",
     "next": "13.1.2",
+    "next-replace-url": "^1.0.3",
     "next-seo": "^5.15.0",
     "next-suspense": "^0.1.3",
     "next-with-less": "^2.0.5",

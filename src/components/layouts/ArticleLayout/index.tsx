@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { observer } from 'mobx-react-lite'
 import type {
   CSSProperties,
@@ -34,7 +35,7 @@ export const ArticleLayout: FC<ArticleLayoutProps> = observer(
   ({ children, aside, asideWidth, padding, postId, ...props }) => {
     const [sidebar, setSidebar] = useState<FC[] | undefined>(aside)
     const [asideLeave, setAsideLeave] = useState(false)
-    const [leaveShow, setLeaveShow] = useState<boolean>(false)
+    const [leaveShow, setLeaveShow] = useState(false)
     const { appStore } = useStore()
     const { ref } = useInView({
       threshold: 0,
@@ -62,13 +63,15 @@ export const ArticleLayout: FC<ArticleLayoutProps> = observer(
             {children}
           </Card>
           {!appStore.isNarrowThanLaptop && (
-            <div ref={ref} style={{ height: '100%' }}>
-              <aside className={styles.sidebar} style={{ width: asideWidth }}>
-                {sidebar?.map((Aside, index) => (
-                  <Aside key={index} />
-                ))}
-              </aside>
-            </div>
+            <aside
+              ref={ref}
+              className={clsx(styles.sidebar)}
+              style={{ width: asideWidth, height: !postId ? '100%' : 'auto' }}
+            >
+              {sidebar?.map((Aside, index) => (
+                <Aside key={index} />
+              ))}
+            </aside>
           )}
         </main>
       </SidebarContext.Provider>
