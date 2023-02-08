@@ -17,7 +17,7 @@ export const MarkdownToc: FC<TocProps> = (props) => {
       title="目录"
       style={{
         position: 'sticky',
-        top: 85,
+        top: 15,
       }}
     >
       <Toc {...props} />
