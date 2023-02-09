@@ -73,6 +73,7 @@ const ListItem = observer(({ item }: { item: IPostList }) => (
                 src={item.cover}
                 width={105}
                 height={70}
+                preview={false}
                 dark={useStore().appStore.colorMode == 'dark'}
               />
             </div>
