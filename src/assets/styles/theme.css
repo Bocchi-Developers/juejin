@@ -24,7 +24,6 @@ html {
   scrollbar-color: var(--juejin-scrollbar) transparent;
   scrollbar-width: thin;
   overflow: overlay;
-  outline: auto !important;
 }
 
 body {
