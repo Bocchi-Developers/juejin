@@ -1,13 +1,16 @@
 import clsx from 'clsx'
+import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
 
-import { List as ArcoList, Image, Skeleton } from '@arco-design/web-react'
+import { List as ArcoList, Skeleton } from '@arco-design/web-react'
 
 import { Divider } from '~/components/universal/Divider'
+import { Image } from '~/components/universal/Image'
 import { PostApi } from '~/services/api/post'
+import { useStore } from '~/store'
 import type { IPostList, Sort } from '~/types/api/post'
 import { relativeTimeFromNow } from '~/utils/time'
 
@@ -56,7 +59,7 @@ const TagBar = (props: IPostList) => {
     </div>
   )
 }
-const ListItem = ({ item }: { item: IPostList }) => (
+const ListItem = observer(({ item }: { item: IPostList }) => (
   <li className={clsx(style.list, !item.ad && style.hover)}>
     <TagBar {...item} />
     <Link href={`post/${item._id}`} target="_blank">
@@ -70,7 +73,7 @@ const ListItem = ({ item }: { item: IPostList }) => (
                 src={item.cover}
                 width={105}
                 height={70}
-                preview={false}
+                dark={useStore().appStore.colorMode == 'dark'}
               />
             </div>
           )
@@ -92,11 +95,11 @@ const ListItem = ({ item }: { item: IPostList }) => (
     </Link>
     <Divider />
   </li>
-)
+))
 const PostNav = () => {
   const router = useRouter()
 
-  const { category, sort } = router.query
+  const { category } = router.query
 
   return (
     <nav className={style.nav}>

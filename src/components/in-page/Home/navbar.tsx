@@ -15,7 +15,6 @@ export const Navbar = observer(() => {
   const [showCategoryTitle, setShowCategoryTitle] = useState(false)
   const homeContext = useContext(HomeSidebarContext)
   const { appStore } = useStore()
-  const [fisrtLoad, setFristLoad] = useState(true)
   const title = useMemo(
     () =>
       homeContext?.category.find((item) => item.slug == router.query.category)

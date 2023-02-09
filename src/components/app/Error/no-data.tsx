@@ -8,7 +8,7 @@ export const NoDataErrorView: FC = () => {
   return (
     <ErrorView
       noSeo
-      statusCode={'404'}
+      statusCode={'无数据'}
       showBackButton={false}
       description={
         <>

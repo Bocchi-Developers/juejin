@@ -1,9 +1,9 @@
 import clsx from 'clsx'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useContext } from 'react'
 
 import { SidebarContext } from '~/components/layouts/ArticleLayout'
+import { ImageNext } from '~/components/universal/Image'
 
 import styles from './appDownload.module.less'
 
@@ -21,7 +21,7 @@ export const AppDownload = () => {
       style={{ top: '282px' }}
     >
       <div className={styles.app}>
-        <Image
+        <ImageNext
           src="https://y.suemor.com/imageshome.59780ae.png"
           width={50}
           height={50}

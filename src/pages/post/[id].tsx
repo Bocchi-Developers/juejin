@@ -1,13 +1,12 @@
 import { observer } from 'mobx-react-lite'
 
-import { Image } from '@arco-design/web-react'
-
 import { buildStoreDataLoadableView } from '~/components/app/LoadableView'
 import { wrapperNextPage } from '~/components/app/WrapperNextPage'
 import { Seo } from '~/components/biz/Seo'
 import { PostAuthor } from '~/components/in-page/Post/aside/author'
 import { RelatedPost } from '~/components/in-page/Post/aside/related'
 import { ArticleLayout } from '~/components/layouts/ArticleLayout'
+import { Image } from '~/components/universal/Image'
 import { Markdown } from '~/components/universal/Markdown'
 import { Author } from '~/components/widgets/Author'
 import { RequestError } from '~/services/server'
@@ -19,7 +18,7 @@ import { noop } from '~/utils/utils'
 const sidebar = [PostAuthor, RelatedPost]
 
 const PostView: PageOnlyProps = observer((props) => {
-  const { postStore } = useStore()
+  const { postStore, appStore } = useStore()
   const post: IPostModel = postStore.get(props.id) || noop
   return (
     <>
@@ -56,7 +55,14 @@ const PostView: PageOnlyProps = observer((props) => {
               </div>
             }
           />
-          {post.cover && <Image src={post?.cover} alt={'cover'} width="100%" />}
+          {post.cover && (
+            <Image
+              src={post?.cover}
+              alt={'cover'}
+              width="100%"
+              dark={appStore.colorMode == 'dark'}
+            />
+          )}
 
           <Markdown codeBlockFully value={post.content} toc />
         </article>
