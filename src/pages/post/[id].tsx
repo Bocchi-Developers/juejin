@@ -42,7 +42,12 @@ const PostView: PageOnlyProps = observer((props) => {
         postId={props.id}
       >
         <article>
-          <h1 className="sr-only" style={{ fontSize: '2.66rem' }}>
+          <h1
+            className="sr-only"
+            style={{
+              fontSize: appStore.isNarrowThanLaptop ? '2rem' : '2.66rem',
+            }}
+          >
             {post.title}
           </h1>
           <Author
