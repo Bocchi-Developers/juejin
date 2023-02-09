@@ -40,6 +40,14 @@
   </a>
 </p>
 
+<p align="center">
+  <a href="https://juejin.suemor.com" target='_blank'>预览</a>
+  ·
+  <a href="https://github.com/Bocchi-Developers/juejin#%E5%BC%80%E5%8F%91">开发</a>
+  ·
+  <a href="https://github.com/Bocchi-Developers/juejin#%E9%83%A8%E7%BD%B2">部署</a>
+</p>
+
 ## 技术栈
 
 - 语言：TypeScript
@@ -79,6 +87,68 @@ pnpm i
 pnpm build
 pnpm prod:pm2
 ```
+
+## 维护者
+
+<table>
+  <tbody>
+        <tr>
+          <td align="center">
+            <a href="https://github.com/suemor233">
+              <img
+                src="https://avatars.githubusercontent.com/u/89030875?v=4?s=100"
+                width="100px;"
+                alt="suemor"
+              />
+              <br />
+              <sub>
+                <b>Suemor</b>
+              </sub>
+            </a>
+          </td>
+          <td align="center">
+            <a href="https://github.com/wexx-1415">
+              <img
+                src="https://avatars.githubusercontent.com/u/84394673?v=4?s=100"
+                width="100px;"
+                alt="wexx"
+              />
+              <br />
+              <sub>
+                <b>wexx</b>
+              </sub>
+            </a>
+          </td>
+            <td align="center">
+            <a href="https://github.com/GrittyB">
+              <img
+                src="https://avatars.githubusercontent.com/u/74409416?v=4?s=100"
+                width="100px;"
+                alt="GrittyB"
+              />
+              <br />
+              <sub>
+                <b>GrittyB</b>
+              </sub>
+            </a>
+          </td>
+          </td>
+            <td align="center">
+            <a href="https://github.com/JIANG-2qzz">
+              <img
+                src="https://avatars.githubusercontent.com/u/122739391?v=4?s=100"
+                width="100px;"
+                alt="jiang"
+              />
+              <br />
+              <sub>
+                <b>jiang</b>
+              </sub>
+            </a>
+          </td>
+        </tr>
+  </tbody>
+</table>
 
 ## 其它
 
