@@ -34,7 +34,7 @@ const TabItem: FC<TabModule> = ({ slug, title, tag }) => {
         !tag && styles['before-hidden'],
       )}
       data-promote={tag?.slice(0, 5)}
-      href={`${slug?.startsWith('http') ? '' : '/'}${slug}`}
+      href={`${slug?.startsWith('http') ? '' : '/'}${slug || ''}`}
       target={slug?.startsWith('http') ? '_blank' : undefined}
     >
       {title}
