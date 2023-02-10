@@ -115,7 +115,9 @@ const PostNav = () => {
             pathname: '/',
             query: item.query
               ? { ...router.query, ...item.query }
-              : { category },
+              : category
+              ? { category }
+              : '',
           }}
           shallow
         >
@@ -129,6 +131,7 @@ const PostNav = () => {
 export const List = () => {
   const [postList, setPostList] = useState<IPostList[]>([])
   const router = useRouter()
+  const [lastRouterName, setLastRouterName] = useState(router.asPath)
   const [load, setLoad] = useState(true)
   const [hasMore, sethasMore] = useState(true)
   const fetchList = async (currentPage: number) => {
@@ -149,10 +152,13 @@ export const List = () => {
   }
 
   useEffect(() => {
-    setLoad(true)
-    sethasMore(true)
-    setPostList([])
-    fetchList(1)
+    if (router.asPath != lastRouterName || postList.length == 0) {
+      setLoad(true)
+      sethasMore(true)
+      setPostList([])
+      fetchList(1)
+      setLastRouterName(router.asPath)
+    }
   }, [router.query])
 
   return (
