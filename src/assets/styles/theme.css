@@ -3,6 +3,10 @@
   transition: color 0.1s, background 0.1s, border 0.1s, box-shadow 0.1s ease-in;
 }
 
+:focus {
+  outline: auto blue;
+}
+
 /*
 * TODO 优化滚动行为
 */
@@ -68,8 +72,8 @@ h1 {
 }
 
 p {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .sidebar-show {
