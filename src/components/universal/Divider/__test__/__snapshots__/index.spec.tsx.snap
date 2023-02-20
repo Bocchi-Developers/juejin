@@ -1,0 +1,11 @@
+// Vitest Snapshot v1
+
+exports[`Card > snapshot 1`] = `
+<div>
+  <div
+    class="arco-divider arco-divider-horizontal test"
+    role="separator"
+    style="margin: .6em 0px 0px 0px;"
+  />
+</div>
+`;

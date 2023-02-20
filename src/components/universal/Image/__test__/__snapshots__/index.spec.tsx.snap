@@ -1,0 +1,19 @@
+// Vitest Snapshot v1
+
+exports[`Card > snapshot 1`] = `
+<div>
+  <div
+    class="arco-image arco-image-loading test"
+    style="opacity: 1;"
+  >
+    <img
+      class="arco-image-img"
+      src="undefined"
+      tabindex="0"
+    />
+    <div
+      class="arco-image-overlay"
+    />
+  </div>
+</div>
+`;

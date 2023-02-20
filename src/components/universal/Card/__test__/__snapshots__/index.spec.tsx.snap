@@ -1,0 +1,13 @@
+// Vitest Snapshot v1
+
+exports[`Card > snapshot 1`] = `
+<div>
+  <div
+    class="arco-card arco-card-size-default test"
+  >
+    <div
+      class="arco-card-body"
+    />
+  </div>
+</div>
+`;

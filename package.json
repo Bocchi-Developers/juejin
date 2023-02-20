@@ -44,7 +44,10 @@
     "prod:pm2": "cross-env NODE_ENV=production pm2 restart ecosystem.config.js",
     "prod:stop": "pm2 stop ecosystem.config.js",
     "prod:reload": "pm2 reload ecosystem.config.js",
-    "release": "vv"
+    "release": "vv",
+    "test": "vitest",
+    "test:watch": "vitest watch",
+    "test:updateSnap": "vitest -u"
   },
   "dependencies": {
     "@arco-design/web-react": "^2.44.0",
@@ -81,11 +84,14 @@
     "@next/bundle-analyzer": "^13.1.2",
     "@suemor/eslint-config-react-ts": "^1.1.0",
     "@suemor/prettier": "^1.1.0",
+    "@testing-library/react": "^14.0.0",
     "@types/node": "18.11.18",
+    "@vitejs/plugin-react": "^3.1.0",
     "commitlint": "^17.4.2",
     "cross-env": "^7.0.3",
     "cz-git": "^1.4.1",
     "husky": "^8.0.3",
+    "jsdom": "^21.1.0",
     "lint-staged": "^13.1.0",
     "next-compose-plugins": "^2.2.1"
   }
