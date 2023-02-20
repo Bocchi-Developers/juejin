@@ -43,6 +43,7 @@ specifiers:
   react-message-popup: 1.0.0
   typescript: 4.9.5
   unified: ^10.1.2
+  vite: ^4.1.3
   vitest: ^0.28.5
 
 dependencies:
@@ -82,7 +83,7 @@ devDependencies:
   '@suemor/prettier': 1.1.0
   '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
   '@types/node': 18.11.18
-  '@vitejs/plugin-react': 3.1.0
+  '@vitejs/plugin-react': 3.1.0_vite@4.1.3
   commitlint: 17.4.2
   cross-env: 7.0.3
   cz-git: 1.4.1
@@ -90,6 +91,7 @@ devDependencies:
   jsdom: 21.1.0
   lint-staged: 13.1.0
   next-compose-plugins: 2.2.1
+  vite: 4.1.3_dprl76twtlijnqpm3fdjsbkzqm
   vitest: 0.28.5_jsdom@21.1.0+less@4.1.3
 
 packages:
@@ -1355,7 +1357,7 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitejs/plugin-react/3.1.0:
+  /@vitejs/plugin-react/3.1.0_vite@4.1.3:
     resolution: {integrity: sha512-AfgcRL8ZBhAlc3BFdigClmTUMISmmzHn7sB2h9U1odvc5U/MjWXsAaz18b/WoppUTDBzxOJwo2VdClfUcItu9g==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -1366,6 +1368,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.19.6_@babel+core@7.20.12
       magic-string: 0.27.0
       react-refresh: 0.14.0
+      vite: 4.1.3_dprl76twtlijnqpm3fdjsbkzqm
     transitivePeerDependencies:
       - supports-color
     dev: true
