@@ -9,6 +9,9 @@ const plugins = [bundleAnalyzer, withLess]
 /** @type {import('next').NextConfig} */
 const bookstairsConfig = {
   reactStrictMode: false,
+  images: {
+    domains: ['qiniu.suemor.com', 'y.suemor.com'],
+  },
 }
 
 module.exports = plugins.reduce(

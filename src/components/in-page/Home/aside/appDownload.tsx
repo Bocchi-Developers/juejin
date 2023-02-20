@@ -4,35 +4,34 @@ import { useContext } from 'react'
 
 import { SidebarContext } from '~/components/layouts/ArticleLayout'
 import { ImageNext } from '~/components/universal/Image'
-import { HomeSidebarContext } from '~/pages'
 
-import styles from './advertisement.module.less'
+import styles from './appDownload.module.less'
 
-export const Advertisement = () => {
-  const homeContext = useContext(HomeSidebarContext)
+export const AppDownload = () => {
   const sidebarContex = useContext(SidebarContext)
-  if (!homeContext?.ad.phoUrl) return null
+
   return (
     <Link
-      href={homeContext.ad?.adHref || ''}
+      href="https://juejin.cn/app"
       target="_blank"
       className={clsx(
         sidebarContex?.asideLeave ? 'sidebar-opacity' : '',
         sidebarContex?.leaveShow ? 'sidebar-show' : '',
       )}
+      style={{ top: '282px' }}
     >
-      <div className={styles.ad}>
+      <div className={styles.app}>
         <ImageNext
-          src={homeContext?.ad.phoUrl}
-          width="240"
-          height="200"
-          alt="Advertisement"
+          src="https://y.suemor.com/imageshome.59780ae.png"
+          width={50}
+          height={50}
+          alt="app"
           priority
         />
 
-        <div onClick={() => window.open(homeContext.ad.putAdHref, '_ blank')}>
-          <span>投放</span>
-          <span>广告</span>
+        <div>
+          <p>下载稀土掘金APP</p>
+          <p>一个帮助开发者成长的社区</p>
         </div>
       </div>
     </Link>

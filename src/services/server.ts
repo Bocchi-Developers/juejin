@@ -73,7 +73,7 @@ export class RequestError extends Error {
 }
 
 export const Get = <T>(url: string, params?: {}): ApiResponse<T> =>
-  new Promise((resolve, reject) => {
+  new Promise((resolve) => {
     axios
       .get(url, { params })
       .then((result) => {
@@ -89,7 +89,7 @@ export const Post = <T>(
   data: unknown,
   params?: {},
 ): ApiResponse<T> => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     axios
       .post(url, data, { params })
       .then((result) => {
@@ -106,7 +106,7 @@ export const Patch = <T>(
   data: unknown,
   params?: {},
 ): ApiResponse<T> => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     axios
       .patch(url, data, { params })
       .then((result) => {

@@ -42,7 +42,7 @@ jobs:
       - name: Build project
         run: |
           sh standalone-build.sh
-    
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -67,3 +67,22 @@ jobs:
           asset_path: ./release.zip
           asset_name: release-ubuntu.zip
           asset_content_type: application/zip
+  deploy:
+    name: Deploy To Remote Server
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Exec deploy script with SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
+          script_stop: true
+          script: |
+            cd /home/ubuntu/code/juejin/juejin
+            sudo su
+            git pull
+            pnpm i
+            pnpm build
+            pnpm prod:pm2

@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import { createContext } from 'react'
 
 import { Advertisement } from '~/components/in-page/Home/aside/advertisement'
+import { AppDownload } from '~/components/in-page/Home/aside/appDownload'
 import { AuthorRecommend } from '~/components/in-page/Home/aside/author'
 import { List } from '~/components/in-page/Home/list'
 import { Navbar } from '~/components/in-page/Home/navbar'
@@ -9,7 +10,7 @@ import { ArticleLayout } from '~/components/layouts/ArticleLayout'
 import { AggregateApi } from '~/services/api/aggregate'
 import type { IAggregateHome } from '~/types/api/aggregate'
 
-const sidebar = [Advertisement, AuthorRecommend]
+const sidebar = [Advertisement, AppDownload, AuthorRecommend]
 
 const Home: NextPage<IAggregateHome> = (props) => {
   return (
@@ -24,7 +25,6 @@ const Home: NextPage<IAggregateHome> = (props) => {
 
 Home.getInitialProps = async () => {
   const aggregate = await AggregateApi.aggregateHomeRequest(3)
-
   return aggregate
 }
 

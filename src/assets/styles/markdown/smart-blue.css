@@ -132,7 +132,7 @@
 .markdown-body blockquote {
   background: var(--juejin-md-quote-bg);
   margin: 2em 0;
-  padding: 2px 20px;
+  padding: 15px 20px;
   border-left: 4px solid var(--juejin-md-quote-left);
 }
 

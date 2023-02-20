@@ -6,7 +6,7 @@ import type { FC } from 'react'
 import { useContext, useState } from 'react'
 
 import { IconNight, IconSun } from '~/components/universal/Icons/dark-mode'
-import { Logo as JuejinLogo } from '~/components/universal/Logo'
+import { JuejinFont, Logo as JuejinLogo } from '~/components/universal/Logo'
 import { InitialContext } from '~/context/initial-data'
 import { useMediaToggle } from '~/hooks/use-media-toggle'
 import { useStore } from '~/store'
@@ -34,7 +34,9 @@ const TabItem: FC<TabModule> = ({ slug, title, tag }) => {
         !tag && styles['before-hidden'],
       )}
       data-promote={tag?.slice(0, 5)}
-      href={''}
+      href={`${slug?.startsWith('http') ? '' : '/'}${slug || ''}`}
+      target={slug?.startsWith('http') ? '_blank' : undefined}
+      shallow
     >
       {title}
     </Link>
@@ -46,13 +48,22 @@ const Header = observer(() => {
   } = useStore()
   const [hidden, setHidden] = useState(true)
   const { tab } = useContext(InitialContext)
+  const { appStore } = useStore()
   return (
-    <header className={styles['main-header']}>
+    <header
+      className={clsx(styles['main-header'], appStore.isOverNar && 'nav-move')}
+    >
       <div className={styles.wrapper}>
         <div className={styles['header-container']}>
           <Link className={styles.logo} href="/">
             <JuejinLogo />
-            {!viewport.mobile && <span>稀土掘金</span>}
+            <div style={{ marginTop: '5px' }}>
+              {!viewport.mobile && (
+                <JuejinFont
+                  fill={appStore.colorMode == 'dark' ? 'white' : 'black'}
+                />
+              )}
+            </div>
           </Link>
           {isNarrowThanLaptop && (
             <div

@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { observer } from 'mobx-react-lite'
 import type {
   CSSProperties,
@@ -7,7 +8,8 @@ import type {
   PropsWithChildren,
   SetStateAction,
 } from 'react'
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
 
 import { Card } from '~/components/universal/Card'
 import { useStore } from '~/store'
@@ -25,14 +27,33 @@ export interface ArticleLayoutProps
 export const SidebarContext = createContext<{
   setSidebar: Dispatch<SetStateAction<FC<{}>[] | undefined>>
   postId?: string
+  asideLeave: boolean
+  leaveShow: boolean
 } | null>(null)
 
 export const ArticleLayout: FC<ArticleLayoutProps> = observer(
   ({ children, aside, asideWidth, padding, postId, ...props }) => {
     const [sidebar, setSidebar] = useState<FC[] | undefined>(aside)
+    const [asideLeave, setAsideLeave] = useState(false)
+    const [leaveShow, setLeaveShow] = useState(false)
     const { appStore } = useStore()
+    const { ref } = useInView({
+      threshold: 0,
+      onChange: (inView) => {
+        setAsideLeave(!inView)
+      },
+    })
+
+    useEffect(() => {
+      setTimeout(() => {
+        setLeaveShow(asideLeave)
+      }, 50)
+    }, [asideLeave])
+
     return (
-      <SidebarContext.Provider value={{ setSidebar, postId }}>
+      <SidebarContext.Provider
+        value={{ setSidebar, postId, asideLeave, leaveShow }}
+      >
         <main className={styles['main-content']} {...props}>
           <Card
             bodyStyle={{ padding: '0' }}
@@ -42,7 +63,11 @@ export const ArticleLayout: FC<ArticleLayoutProps> = observer(
             {children}
           </Card>
           {!appStore.isNarrowThanLaptop && (
-            <aside className={styles.sidebar} style={{ width: asideWidth }}>
+            <aside
+              ref={ref}
+              className={clsx(styles.sidebar)}
+              style={{ width: asideWidth, height: !postId ? '100%' : 'auto' }}
+            >
               {sidebar?.map((Aside, index) => (
                 <Aside key={index} />
               ))}

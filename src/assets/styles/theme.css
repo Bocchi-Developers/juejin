@@ -3,6 +3,10 @@
   transition: color 0.1s, background 0.1s, border 0.1s, box-shadow 0.1s ease-in;
 }
 
+:focus {
+  outline: auto blue;
+}
+
 /*
 * TODO 优化滚动行为
 */
@@ -61,4 +65,25 @@ h1 {
 
 .arco-card {
   transition: color 0.1s, background 0.1s, border 0.1s, box-shadow 0.1s ease-in !important;
+}
+
+.nav-move {
+  transform: translate3d(0, -5rem, 0);
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-show {
+  position: fixed;
+  width: 240px;
+  top: 67px;
+  opacity: 1 !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar-opacity {
+  opacity: 0;
 }

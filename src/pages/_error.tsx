@@ -2,7 +2,6 @@
 import isNumber from 'lodash-es/isNumber'
 import type { NextPage } from 'next'
 import { NextSeo } from 'next-seo'
-import { useEffect } from 'react'
 
 import { ErrorView, errorToText } from '~/components/app/Error'
 import { useIsClient } from '~/hooks/use-is-client'
@@ -12,25 +11,10 @@ const ErrorPage: NextPage<{ statusCode: number; err: any }> = ({
   statusCode = 500,
   err,
 }) => {
-  useEffect(() => {
-    // if (err) {
-    //   const errMessage = err._message || err.message
-    // if (errMessage) {
-    //   message.error(errMessage)
-    // }
-    // }
-  }, [err, statusCode])
-
   const isClient = useIsClient()
-  const parseCodeInTitle = 'document' in globalThis && parseInt(document.title)
-  const isValidStatusCode = isNumber(parseCodeInTitle) && statusCode >= 400
   // FIXME error page hydrate error, cause error data not equal to server side.
   return isClient ? (
-    <ErrorView
-      showBackButton
-      showRefreshButton
-      statusCode={isValidStatusCode ? isNumber(parseCodeInTitle) : statusCode}
-    />
+    <ErrorView showBackButton showRefreshButton statusCode={statusCode} />
   ) : (
     <NextSeo title={`${statusCode.toString()} - ${errorToText(statusCode)}`} />
   )

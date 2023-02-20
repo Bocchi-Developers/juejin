@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+
 import { clsx } from 'clsx'
 import range from 'lodash-es/range'
 import type { MarkdownToJSX } from 'markdown-to-jsx'
 import { compiler } from 'markdown-to-jsx'
+import { observer } from 'mobx-react-lite'
 import type { FC, PropsWithChildren } from 'react'
 import React, {
   createElement,
-  memo,
   useContext,
   useEffect,
   useMemo,
@@ -15,6 +16,8 @@ import React, {
 } from 'react'
 
 import { SidebarContext } from '~/components/layouts/ArticleLayout'
+import { Image } from '~/components/universal/Image'
+import { useStore } from '~/store'
 
 export interface MdProps {
   value?: string
@@ -30,13 +33,12 @@ export interface MdProps {
 }
 
 export const Markdown: FC<PropsWithChildren<MdProps & MarkdownToJSX.Options>> =
-  memo((props) => {
+  observer((props) => {
     const {
       value,
       renderers,
       style,
       wrapperProps = {},
-      codeBlockFully = false,
       className,
       overrides,
       extendsRules,
@@ -46,7 +48,7 @@ export const Markdown: FC<PropsWithChildren<MdProps & MarkdownToJSX.Options>> =
     const sideBarContext = useContext(SidebarContext)
     const ref = useRef<HTMLDivElement>(null)
     const [headings, setHeadings] = useState<HTMLElement[]>([])
-
+    const { appStore } = useStore()
     useEffect(() => {
       if (!ref.current) {
         return
@@ -71,6 +73,9 @@ export const Markdown: FC<PropsWithChildren<MdProps & MarkdownToJSX.Options>> =
         wrapper: null,
 
         overrides: {
+          img: (props) => (
+            <Image dark={appStore.colorMode == 'dark'} {...props} />
+          ),
           ...overrides,
         },
 
@@ -104,6 +109,7 @@ export const Markdown: FC<PropsWithChildren<MdProps & MarkdownToJSX.Options>> =
       renderers,
       additionalParserRules,
       rest,
+      appStore.colorMode,
     ])
 
     return (

@@ -17,12 +17,6 @@ export default class AppUIStore {
   colorMode: 'light' | 'dark' = 'light'
   mediaType: 'screen' | 'print' = 'screen'
 
-  headerNav = {
-    title: '',
-    meta: '',
-    show: false,
-  }
-
   shareData: { title: string; text?: string; url: string } | null = null
 
   updatePosition(direction: 'up' | 'down' | null, y: number) {
@@ -46,12 +40,12 @@ export default class AppUIStore {
     return this.position > window.innerHeight || this.position > screen.height
   }
 
-  get isOverPostTitleHeight() {
+  get isOverNar() {
     if (!isClientSide()) {
       return
     }
 
-    return this.position > 126 || this.position > screen.height / 3
+    return this.position > 300
   }
 
   updateViewport() {
@@ -69,6 +63,7 @@ export default class AppUIStore {
     ) {
       return
     }
+
     this.viewport = {
       w: width,
       h: innerHeight,
