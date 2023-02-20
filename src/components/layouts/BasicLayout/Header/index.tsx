@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import type { FC } from 'react'
 import { useContext, useState } from 'react'
 
+import { Collapse, Expand } from '~/components/universal/Icons/TabIcon'
 import { IconNight, IconSun } from '~/components/universal/Icons/dark-mode'
 import { JuejinFont, Logo as JuejinLogo } from '~/components/universal/Logo'
 import { InitialContext } from '~/context/initial-data'
@@ -22,11 +23,13 @@ export const SwitchTheme = () => {
     </div>
   )
 }
-
-const TabItem: FC<TabModule> = ({ slug, title, tag }) => {
+const TabItem: FC<
+  TabModule & React.AnchorHTMLAttributes<HTMLAnchorElement>
+> = ({ slug, title, tag, onClick }) => {
   const router = useRouter()
   return (
     <Link
+      onClick={onClick}
       className={clsx(
         styles['tab-item'],
         (router.pathname == `/${slug}` || (!slug && router.pathname == '/')) &&
@@ -47,6 +50,7 @@ const Header = observer(() => {
     appStore: { isNarrowThanLaptop, viewport },
   } = useStore()
   const [hidden, setHidden] = useState(true)
+  const [tabExpand, setTabExpand] = useState(false)
   const { tab } = useContext(InitialContext)
   const { appStore } = useStore()
   return (
@@ -78,7 +82,6 @@ const Header = observer(() => {
               {tab[0].title}
             </div>
           )}
-
           {!(isNarrowThanLaptop ? hidden : false) && (
             <div
               className={clsx(
@@ -86,9 +89,22 @@ const Header = observer(() => {
                 isNarrowThanLaptop && styles['tab-mobile'],
               )}
             >
-              {tab.map((tab) => (
-                <TabItem key={tab._id} {...tab} />
-              ))}
+              {tab
+                .slice(0, isNarrowThanLaptop || tabExpand ? undefined : 9)
+                .map((tab) => (
+                  <TabItem key={tab._id} {...tab} />
+                ))}
+              {tab.length > 9 && !isNarrowThanLaptop && (
+                <div
+                  className={styles['tab-more']}
+                  onClick={() => {
+                    setTabExpand(!tabExpand)
+                  }}
+                  title={tabExpand ? '收起' : '展开'}
+                >
+                  {tabExpand ? <Collapse /> : <Expand />}
+                </div>
+              )}
             </div>
           )}
         </div>
