@@ -23,13 +23,10 @@ export const SwitchTheme = () => {
     </div>
   )
 }
-const TabItem: FC<
-  TabModule & React.AnchorHTMLAttributes<HTMLAnchorElement>
-> = ({ slug, title, tag, onClick }) => {
+const TabItem: FC<TabModule> = ({ slug, title, tag }) => {
   const router = useRouter()
   return (
     <Link
-      onClick={onClick}
       className={clsx(
         styles['tab-item'],
         (router.pathname == `/${slug}` || (!slug && router.pathname == '/')) &&

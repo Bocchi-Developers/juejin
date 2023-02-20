@@ -51,24 +51,6 @@ export const Navbar = observer(() => {
               {item.name}
             </Link>
           ))}
-          {homeContext?.category.map((item) => (
-            <Link
-              key={item.name}
-              className={clsx(
-                styles['nav-item'],
-                (router.query?.category
-                  ? router.query?.category == item.slug
-                  : item.slug == '') && styles.active,
-              )}
-              href={{
-                pathname: '/',
-                query: item.slug != '' ? { category: item.slug } : null,
-              }}
-              shallow
-            >
-              {item.name}
-            </Link>
-          ))}
         </div>
       </nav>
     </>
