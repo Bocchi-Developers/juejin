@@ -25,7 +25,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Cache pnpm modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         env:
           cache-name: cache-pnpm-modules
         with:
@@ -33,7 +33,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             ${{ github.workspace }}/.next/cache
