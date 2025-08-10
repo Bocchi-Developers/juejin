@@ -52,8 +52,8 @@
   "dependencies": {
     "@arco-design/web-react": "^2.44.0",
     "@next/font": "13.1.6",
-    "@types/react": "18.0.27",
-    "@types/react-dom": "18.0.10",
+    "@types/react": "18.0.38",
+    "@types/react-dom": "18.0.11",
     "axios": "^1.2.5",
     "clsx": "^1.2.1",
     "css-spring": "^4.1.0",
